@@ -85,7 +85,7 @@ export default function App() {
     render()
   }, [])
 
-  // Auto-start on mount
+  // Auto-start on mount & Custom cursor active state
   useEffect(() => {
     // Transition from timer to slide 1
     const timer = setTimeout(() => {
@@ -99,10 +99,18 @@ export default function App() {
         canvasRef.current.height = window.innerHeight
       }
     }
+
+    const handleMouseDown = () => document.body.classList.add('mouse-down')
+    const handleMouseUp = () => document.body.classList.remove('mouse-down')
+
     window.addEventListener('resize', handleResize)
+    window.addEventListener('mousedown', handleMouseDown)
+    window.addEventListener('mouseup', handleMouseUp)
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('mousedown', handleMouseDown)
+      window.removeEventListener('mouseup', handleMouseUp)
       clearTimeout(timer)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)

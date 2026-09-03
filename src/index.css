@@ -2,6 +2,34 @@
   box-sizing: border-box;
 }
 
+/* Custom Cursors: Normal Hover & Clicked State */
+html,
+body,
+* {
+  cursor: url('/img/cursor_default.png') 3 0, auto;
+}
+
+button,
+a,
+[role="button"],
+.btn,
+#tap,
+.btn-replay {
+  cursor: url('/img/cursor_default.png') 3 0, pointer;
+}
+
+html:active,
+html:active *,
+body:active,
+body:active *,
+button:active,
+a:active,
+[role="button"]:active,
+body.mouse-down,
+body.mouse-down * {
+  cursor: url('/img/cursor_clicked.png') 5 0, auto !important;
+}
+
 html,
 body {
   margin: 0;
