@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import './App.css'
 import bgElements from './bg_elements.json'
+import PullString from './PullString'
 
 const teks1Lines = [
   'Today, I send all my warmest prayers and wishes to the heavens for you.',
@@ -185,8 +186,8 @@ export default function App() {
     return () => clearTimeout(t)
   }, [slide])
 
-  // Advance slides on background/tap click
-  const handlePageClick = () => {
+  // Advance slides via Pull String
+  const handlePullString = () => {
     if (slide === 1) {
       setSlideOutAnim('animate__backOutDown')
       setTapVisible(false)
@@ -246,8 +247,13 @@ export default function App() {
   }
 
   return (
-    <div className="bg" id="content" onClick={handlePageClick}>
-      {/* Original Background Animated Clouds and Hearts Layer */}
+    <div className="bg" id="content">
+      {/* Interactive Top-Right Themed Pull String */}
+      <PullString
+        onPull={handlePullString}
+        isPrompting={tapVisible}
+        disabled={slide === 4 || slide === 5}
+      />
       <div className="original-sky-layer" aria-hidden="true">
         {bgElements.clouds.map((c, index) => (
           <img
@@ -329,8 +335,9 @@ export default function App() {
             id="tap"
             className={`animate__animated ${tapVisible ? 'animate__pulse animate__infinite' : 'd-none'}`}
             style={{ display: tapVisible ? 'inline-block' : 'none' }}
+            onClick={handlePullString}
           >
-            Tap anywhere to continue
+            Pull the string to continue
           </p>
         </div>
       )}
@@ -349,8 +356,12 @@ export default function App() {
           </div>
           {tapVisible && (
             <div style={{ position: 'absolute', bottom: '15px', right: '20px', zIndex: 10 }}>
-              <span id="tap" className="animate__animated animate__pulse animate__infinite">
-                Tap anywhere to continue
+              <span
+                id="tap"
+                className="animate__animated animate__pulse animate__infinite"
+                onClick={handlePullString}
+              >
+                Pull the string to continue
               </span>
             </div>
           )}
@@ -371,8 +382,12 @@ export default function App() {
           </div>
           {tapVisible && (
             <div style={{ position: 'absolute', bottom: '15px', right: '20px', zIndex: 10 }}>
-              <span id="tap" className="animate__animated animate__pulse animate__infinite">
-                Tap anywhere to continue
+              <span
+                id="tap"
+                className="animate__animated animate__pulse animate__infinite"
+                onClick={handlePullString}
+              >
+                Pull the string to continue
               </span>
             </div>
           )}
