@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import './App.css'
+import bgElements from './bg_elements.json'
 
 const teks1Lines = [
   'Today, I send all my warmest prayers and wishes to the heavens for you.',
@@ -238,6 +239,49 @@ export default function App() {
 
   return (
     <div className="bg" id="content" onClick={handlePageClick}>
+      {/* Original Background Animated Clouds and Hearts Layer */}
+      <div className="original-sky-layer" aria-hidden="true">
+        {bgElements.clouds.map((c, index) => (
+          <img
+            key={c.id}
+            src={c.file}
+            alt=""
+            className={`original-cloud original-cloud-${index}`}
+            style={{
+              top: `${c.top}%`,
+              left: `${c.left}%`,
+              width: `${c.width}%`,
+              height: `${c.height}%`,
+            }}
+          />
+        ))}
+
+        {bgElements.hearts.map((h, index) => {
+          const animClass = index % 3 === 0 ? 'heartFloatA' : index % 3 === 1 ? 'heartFloatB' : 'heartFloatC'
+          const duration = 3.2 + (index % 5) * 0.45
+          const delay = (index * 0.35) % 3.5
+          return (
+            <img
+              key={h.id}
+              src={h.file}
+              alt=""
+              className="original-heart"
+              style={{
+                top: `${h.top}%`,
+                left: `${h.left}%`,
+                width: `${h.width}%`,
+                height: `${h.height}%`,
+                animationName: animClass,
+                animationDuration: `${duration}s`,
+                animationDelay: `-${delay}s`,
+                animationTimingFunction: 'ease-in-out',
+                animationIterationCount: 'infinite',
+              }}
+            />
+          )
+        })}
+      </div>
+
       {/* Confetti Canvas */}
       <canvas ref={canvasRef} className="confetti-canvas-container" />
 

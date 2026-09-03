@@ -1,6 +1,6 @@
 .bg {
-  /* Location of the image */
-  background-image: url('/img/background.jpg');
+  /* Clean base background without static clouds/hearts */
+  background-image: url('/img/background_base.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -15,6 +15,105 @@
   position: relative;
   padding: 20px 15px;
   overflow: hidden;
+}
+
+/* Original Clouds & Hearts Sky Layer */
+.original-sky-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100vw, calc(100vh * 6325 / 3514));
+  height: max(100vh, calc(100vw * 3514 / 6325));
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.original-cloud {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 4px 10px rgba(255, 140, 160, 0.15));
+}
+
+.original-cloud-0 {
+  animation: cloudFloat0 7.2s ease-in-out infinite;
+}
+
+.original-cloud-1 {
+  animation: cloudFloat1 6.0s ease-in-out infinite;
+}
+
+.original-cloud-2 {
+  animation: cloudFloat2 8.0s ease-in-out infinite;
+}
+
+.original-cloud-3 {
+  animation: cloudFloat3 8.5s ease-in-out infinite;
+}
+
+@keyframes cloudFloat0 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-16px, -12px); }
+}
+
+@keyframes cloudFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(14px, -10px); }
+}
+
+@keyframes cloudFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  35% { transform: translate(16px, -18px) rotate(1.2deg); }
+  70% { transform: translate(-10px, -8px) rotate(-0.8deg); }
+}
+
+@keyframes cloudFloat3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  40% { transform: translate(-18px, -16px) rotate(-1.2deg); }
+  75% { transform: translate(10px, -6px) rotate(0.8deg); }
+}
+
+/* Original Hearts Animations */
+.original-heart {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 2px 6px rgba(230, 57, 70, 0.2));
+}
+
+@keyframes heartFloatA {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  35% {
+    transform: translate(4px, -12px) scale(1.15) rotate(4deg);
+  }
+  70% {
+    transform: translate(-3px, -4px) scale(0.95) rotate(-3deg);
+  }
+}
+
+@keyframes heartFloatB {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  45% {
+    transform: translate(-5px, -14px) scale(1.12) rotate(-5deg);
+  }
+  80% {
+    transform: translate(3px, -6px) scale(0.97) rotate(3deg);
+  }
+}
+
+@keyframes heartFloatC {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(2px, -16px) scale(1.18) rotate(2deg);
+  }
 }
 
 /* Image */

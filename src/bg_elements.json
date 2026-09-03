@@ -1,0 +1,222 @@
+{
+  "clouds": [
+    {
+      "id": "cloud-0",
+      "file": "/img/bg_elements/cloud_0.png",
+      "top": 0.0,
+      "left": 22.8,
+      "width": 14.83,
+      "height": 13.18,
+      "area": 303787
+    },
+    {
+      "id": "cloud-1",
+      "file": "/img/bg_elements/cloud_1.png",
+      "top": 10.73,
+      "left": 62.43,
+      "width": 10.39,
+      "height": 10.47,
+      "area": 154378
+    },
+    {
+      "id": "cloud-2",
+      "file": "/img/bg_elements/cloud_2.png",
+      "top": 27.63,
+      "left": 2.48,
+      "width": 16.32,
+      "height": 16.48,
+      "area": 381356
+    },
+    {
+      "id": "cloud-3",
+      "file": "/img/bg_elements/cloud_3.png",
+      "top": 37.88,
+      "left": 79.89,
+      "width": 16.32,
+      "height": 16.48,
+      "area": 381352
+    }
+  ],
+  "hearts": [
+    {
+      "id": "heart-0",
+      "file": "/img/bg_elements/heart_0.png",
+      "top": 2.25,
+      "left": 70.88,
+      "width": 2.23,
+      "height": 3.78,
+      "area": 12617
+    },
+    {
+      "id": "heart-1",
+      "file": "/img/bg_elements/heart_1.png",
+      "top": 4.13,
+      "left": 3.81,
+      "width": 3.6,
+      "height": 5.98,
+      "area": 31893
+    },
+    {
+      "id": "heart-2",
+      "file": "/img/bg_elements/heart_2.png",
+      "top": 4.72,
+      "left": 47.6,
+      "width": 3.04,
+      "height": 4.78,
+      "area": 22188
+    },
+    {
+      "id": "heart-3",
+      "file": "/img/bg_elements/heart_3.png",
+      "top": 7.48,
+      "left": 95.53,
+      "width": 2.26,
+      "height": 3.78,
+      "area": 12613
+    },
+    {
+      "id": "heart-4",
+      "file": "/img/bg_elements/heart_4.png",
+      "top": 9.53,
+      "left": 83.04,
+      "width": 3.6,
+      "height": 5.98,
+      "area": 31897
+    },
+    {
+      "id": "heart-5",
+      "file": "/img/bg_elements/heart_5.png",
+      "top": 9.99,
+      "left": 54.23,
+      "width": 3.6,
+      "height": 6.0,
+      "area": 31886
+    },
+    {
+      "id": "heart-6",
+      "file": "/img/bg_elements/heart_6.png",
+      "top": 12.41,
+      "left": 39.49,
+      "width": 2.23,
+      "height": 3.76,
+      "area": 12618
+    },
+    {
+      "id": "heart-7",
+      "file": "/img/bg_elements/heart_7.png",
+      "top": 13.06,
+      "left": 14.02,
+      "width": 3.04,
+      "height": 4.78,
+      "area": 22198
+    },
+    {
+      "id": "heart-8",
+      "file": "/img/bg_elements/heart_8.png",
+      "top": 18.44,
+      "left": 22.51,
+      "width": 3.23,
+      "height": 5.26,
+      "area": 25147
+    },
+    {
+      "id": "heart-9",
+      "file": "/img/bg_elements/heart_9.png",
+      "top": 25.61,
+      "left": 73.09,
+      "width": 3.6,
+      "height": 6.0,
+      "area": 31888
+    },
+    {
+      "id": "heart-10",
+      "file": "/img/bg_elements/heart_10.png",
+      "top": 29.68,
+      "left": 91.11,
+      "width": 2.23,
+      "height": 3.76,
+      "area": 12607
+    },
+    {
+      "id": "heart-11",
+      "file": "/img/bg_elements/heart_11.png",
+      "top": 37.11,
+      "left": 24.43,
+      "width": 3.6,
+      "height": 5.98,
+      "area": 31887
+    },
+    {
+      "id": "heart-12",
+      "file": "/img/bg_elements/heart_12.png",
+      "top": 46.22,
+      "left": 13.33,
+      "width": 2.21,
+      "height": 3.78,
+      "area": 12610
+    },
+    {
+      "id": "heart-13",
+      "file": "/img/bg_elements/heart_13.png",
+      "top": 46.22,
+      "left": 71.27,
+      "width": 2.25,
+      "height": 3.78,
+      "area": 12615
+    },
+    {
+      "id": "heart-14",
+      "file": "/img/bg_elements/heart_14.png",
+      "top": 55.86,
+      "left": 25.11,
+      "width": 2.23,
+      "height": 3.78,
+      "area": 12620
+    },
+    {
+      "id": "heart-15",
+      "file": "/img/bg_elements/heart_15.png",
+      "top": 57.51,
+      "left": 4.11,
+      "width": 3.6,
+      "height": 6.0,
+      "area": 31894
+    },
+    {
+      "id": "heart-16",
+      "file": "/img/bg_elements/heart_16.png",
+      "top": 61.78,
+      "left": 95.54,
+      "width": 2.23,
+      "height": 3.78,
+      "area": 12613
+    },
+    {
+      "id": "heart-17",
+      "file": "/img/bg_elements/heart_17.png",
+      "top": 63.66,
+      "left": 78.99,
+      "width": 3.6,
+      "height": 6.0,
+      "area": 31887
+    },
+    {
+      "id": "heart-18",
+      "file": "/img/bg_elements/heart_18.png",
+      "top": 68.67,
+      "left": 18.12,
+      "width": 3.05,
+      "height": 4.78,
+      "area": 22191
+    },
+    {
+      "id": "heart-19",
+      "file": "/img/bg_elements/heart_19.png",
+      "top": 74.93,
+      "left": 71.24,
+      "width": 3.23,
+      "height": 5.26,
+      "area": 25152
+    }
+  ]
+}
