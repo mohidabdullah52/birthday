@@ -1,0 +1,316 @@
+.bg {
+  /* Location of the image */
+  background-image: url('/img/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #FEC0CD;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 15px;
+  overflow: hidden;
+}
+
+/* Image */
+.img {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 350px;
+  max-width: 90vw;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+#slideSatu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+#tap {
+  display: inline-block;
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: #6c757d;
+  cursor: pointer;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+}
+
+#tap:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #495057;
+}
+
+/* Paper */
+.paper {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  width: 92%;
+  max-width: 760px;
+  min-width: 290px;
+  min-height: 480px;
+  margin: 30px auto;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  text-align: left;
+}
+
+.paper:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 45px;
+  background: radial-gradient(#616161 5px, transparent 6px) repeat-y;
+  background-size: 30px 30px;
+  border-right: 3px solid #D44147;
+  box-sizing: border-box;
+}
+
+.paper-content {
+  position: absolute;
+  top: 30px;
+  right: 15px;
+  bottom: 30px;
+  left: 55px;
+  background: linear-gradient(transparent, transparent 28px, #91D1D3 28px);
+  background-size: 30px 30px;
+  overflow-y: auto;
+}
+
+.paper-content .teks {
+  text-align: left;
+  width: 100%;
+  min-height: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #3f3f44;
+  font-family: 'Handlee', cursive;
+  font-size: 19px;
+  box-sizing: border-box;
+  z-index: 1;
+  white-space: pre-wrap;
+}
+
+.cursor-blink {
+  display: inline-block;
+  font-weight: bold;
+  animation: blink 0.75s infinite;
+  color: #D44147;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Kotak Slide 4 */
+.kotak {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  min-width: 280px;
+  padding: 30px 20px;
+  margin: auto;
+  display: inline-block;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: top 0.25s ease-out, left 0.25s ease-out;
+}
+
+.kotak h5 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+
+.btn {
+  border-radius: 40px;
+  padding: 8px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-width: 2px;
+  border-style: solid;
+  background: transparent;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+}
+
+.btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #17a2b8;
+}
+
+/* Slide 5 & Heart */
+#slideLima {
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-icon {
+  color: #e63946;
+  font-size: 5rem;
+  filter: drop-shadow(0 6px 14px rgba(230, 57, 70, 0.35));
+  animation: heart-beat 1.2s infinite;
+}
+
+@keyframes heart-beat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { transform: scale(1); }
+}
+
+#trims {
+  margin-top: 18px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #555;
+  font-family: 'Handlee', cursive;
+  min-height: 2.2rem;
+}
+
+.btn-replay {
+  margin-top: 30px;
+  background: #ffffff;
+  border: 2px solid #e63946;
+  color: #e63946;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.btn-replay:hover {
+  background: #e63946;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Timer Container */
+.timer-container {
+  color: #333;
+  position: relative;
+  margin: auto;
+  padding: 25px 30px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  max-width: 480px;
+  width: 90%;
+}
+
+.timer-container h5 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #2b2b2b;
+}
+
+.timer-container ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.timer-container li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 12px 14px;
+  border-radius: 10px;
+  min-width: 65px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.timer-container li span {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: #d44147;
+  margin-bottom: 2px;
+}
+
+/* Confetti Container */
+.confetti-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
