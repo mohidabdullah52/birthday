@@ -7,6 +7,9 @@ export default function PullString({ onPull, isPrompting, disabled }) {
   const startYRef = useRef(0)
   const currentYRef = useRef(0)
 
+  const hasMovedRef = useRef(false)
+  const isTriggeringRef = useRef(false)
+
   // Spring release animation
   const snapBackAndTrigger = useCallback(
     (shouldTrigger = true) => {
@@ -14,29 +17,37 @@ export default function PullString({ onPull, isPrompting, disabled }) {
       setIsPulling(false)
       setPullY(0)
 
-      if (shouldTrigger && onPull && !disabled) {
+      if (shouldTrigger && onPull && !disabled && !isTriggeringRef.current) {
+        isTriggeringRef.current = true
         onPull()
+        setTimeout(() => {
+          isTriggeringRef.current = false
+        }, 1200)
       }
 
       setTimeout(() => {
         setIsSnapping(false)
-      }, 500)
+      }, 400)
     },
     [onPull, disabled]
   )
 
   // Mouse / touch drag handlers
   const handleStart = (clientY) => {
-    if (disabled || isSnapping) return
+    if (disabled || isSnapping || isTriggeringRef.current) return
     setIsPulling(true)
     startYRef.current = clientY
     currentYRef.current = 0
+    hasMovedRef.current = false
   }
 
   const handleMove = useCallback(
     (clientY) => {
       if (!isPulling) return
-      const delta = Math.max(0, Math.min(100, clientY - startYRef.current))
+      const delta = Math.max(0, Math.min(90, clientY - startYRef.current))
+      if (delta > 6) {
+        hasMovedRef.current = true
+      }
       currentYRef.current = delta
       setPullY(delta)
     },
@@ -45,8 +56,14 @@ export default function PullString({ onPull, isPrompting, disabled }) {
 
   const handleEnd = useCallback(() => {
     if (!isPulling) return
-    if (currentYRef.current > 35) {
+    if (currentYRef.current > 25) {
       snapBackAndTrigger(true)
+    } else if (!hasMovedRef.current) {
+      // It was a click on mousedown/mouseup!
+      setPullY(50)
+      setTimeout(() => {
+        snapBackAndTrigger(true)
+      }, 100)
     } else {
       snapBackAndTrigger(false)
     }
@@ -76,15 +93,15 @@ export default function PullString({ onPull, isPrompting, disabled }) {
     }
   }, [isPulling, handleMove, handleEnd])
 
-  // Simple click handler
+  // Click handler (also covers keyboard Enter/Space or click without drag)
   const handleClick = (e) => {
     e.stopPropagation()
-    if (disabled || isSnapping || isPulling) return
+    if (disabled || isSnapping || isTriggeringRef.current) return
     setIsSnapping(true)
-    setPullY(65)
+    setPullY(55)
     setTimeout(() => {
       snapBackAndTrigger(true)
-    }, 150)
+    }, 120)
   }
 
   const stringHeight = 180 + pullY

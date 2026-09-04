@@ -168,6 +168,12 @@ export default function App() {
     return () => clearInterval(interval)
   }, [slide])
 
+  // Preload cloud image so there is zero hitching when transition starts
+  useEffect(() => {
+    const img = new Image()
+    img.src = '/img/clean_cloud_2.png'
+  }, [])
+
   // Slide 5 Typewriter effect
   useEffect(() => {
     if (slide !== 5) return
@@ -198,29 +204,29 @@ export default function App() {
       setTimeout(() => {
         setTeks1Typed('')
         setSlide(2)
-      }, 1200)
+      }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 2700)
+      }, 2300)
     } else if (slide === 2) {
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setTeks2Typed('')
         setSlide(3)
-      }, 1200)
+      }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 2700)
+      }, 2300)
     } else if (slide === 3) {
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setSlide(4)
-      }, 1200)
+      }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 2700)
+      }, 2300)
     }
   }
 
@@ -359,7 +365,7 @@ export default function App() {
       {slide === 2 && (
         <div
           id="slideDua"
-          className={`slides paper animate__animated ${slideOutAnim || 'animate__zoomInDown animate__slow'}`}
+          className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
         >
           <div className="paper-content">
             <p id="teks1" className="teks">
@@ -385,7 +391,7 @@ export default function App() {
       {slide === 3 && (
         <div
           id="slideTiga"
-          className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeInRight'}`}
+          className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
         >
           <div className="paper-content">
             <p id="teks2" className="teks">
@@ -410,7 +416,7 @@ export default function App() {
       {/* Slide 4: Question Box */}
       {slide === 4 && (
         <div
-          className={`kotak slides animate__animated ${slideOutAnim || 'animate__fadeInDown'}`}
+          className={`kotak slides animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
           id="slideEmpat"
         >
           <h5>Do you like it?</h5>

@@ -652,79 +652,73 @@
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 2000;
+  z-index: 2500;
   overflow: hidden;
 }
 
-/* Soft central cloud haze that covers the screen at peak */
-.cloud-smooth-veil {
+/* Ascending Flotilla: moves in a single continuous hardware-accelerated pass */
+.cloud-wave-flotilla {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120vw;
-  height: 90vh;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 55%, rgba(254, 192, 205, 0.6) 80%, transparent 100%);
-  border-radius: 50%;
-  filter: blur(35px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1050px;
   pointer-events: none;
-  z-index: 10;
-  will-change: opacity, transform;
-  animation: veilMotion 2.6s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+  will-change: transform;
+  transform: translate3d(0, 100vh, 0);
+  animation: cloudWaveAscent 2.2s cubic-bezier(0.34, 0, 0.22, 1) forwards;
 }
 
-@keyframes veilMotion {
+@keyframes cloudWaveAscent {
   0% {
-    transform: translate(-50%, 100vh) scale(0.85);
-    opacity: 0;
+    transform: translate3d(0, 100vh, 0);
   }
-  35% {
-    opacity: 0.95;
-  }
-  50% {
-    transform: translate(-50%, 0vh) scale(1.1);
-    opacity: 1;
-  }
-  65% {
-    opacity: 0.95;
+  48% {
+    transform: translate3d(0, calc(-290px + 20vh), 0);
   }
   100% {
-    transform: translate(-50%, -115vh) scale(0.9);
-    opacity: 0;
+    transform: translate3d(0, calc(-1080px - 10vh), 0);
   }
 }
 
-/* Individual well-formed cartoon clouds rising smoothly */
+/* Soft white sheet in the middle of the wave (zero blur filter for 60fps smoothness) */
+.cloud-wave-sheet {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  height: 460px;
+  pointer-events: none;
+  z-index: 18;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.92) 20%,
+    rgba(255, 255, 255, 1) 40%,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 255, 255, 0.92) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Individual well-formed cartoon clouds positioned inside the flotilla */
 .smooth-cloud-item {
   position: absolute;
-  bottom: 0;
   display: block;
   pointer-events: none;
   will-change: transform;
-  animation-name: smoothCloudRise;
-  animation-duration: 2.6s;
-  animation-timing-function: cubic-bezier(0.32, 0, 0.2, 1);
-  animation-fill-mode: forwards;
+  backface-visibility: hidden;
 }
 
 .smooth-cloud-img {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 12px 28px rgba(244, 143, 177, 0.38));
+  pointer-events: none;
+  user-select: none;
+  /* Pink shaded rim is already baked into the artwork PNG; no expensive dynamic CSS filters needed */
 }
 
-@keyframes smoothCloudRise {
-  0% {
-    transform: translate3d(0, 110vh, 0) scale(0.94);
-  }
-  48% {
-    transform: translate3d(var(--drift, 0px), 0vh, 0) scale(1.04);
-  }
-  100% {
-    transform: translate3d(calc(var(--drift, 0px) * 1.5), -125vh, 0) scale(0.98);
-  }
-}
 
 
 
