@@ -643,7 +643,7 @@
 }
 
 /* ========================================================
-   BOTTOM-TO-TOP FULL CLOUD FLOTILLA TRANSITION
+   BOTTOM-TO-TOP SMOOTH CLOUD TRANSITION
    ======================================================== */
 .cloud-transition-overlay {
   position: fixed;
@@ -656,42 +656,73 @@
   overflow: hidden;
 }
 
-.flotilla-cloud {
+/* Soft central cloud haze that covers the screen at peak */
+.cloud-smooth-veil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120vw;
+  height: 90vh;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 55%, rgba(254, 192, 205, 0.6) 80%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 10;
+  will-change: opacity, transform;
+  animation: veilMotion 2.6s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+}
+
+@keyframes veilMotion {
+  0% {
+    transform: translate(-50%, 100vh) scale(0.85);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.95;
+  }
+  50% {
+    transform: translate(-50%, 0vh) scale(1.1);
+    opacity: 1;
+  }
+  65% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -115vh) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Individual well-formed cartoon clouds rising smoothly */
+.smooth-cloud-item {
   position: absolute;
   bottom: 0;
   display: block;
   pointer-events: none;
   will-change: transform;
-  animation-name: flotillaRise;
-  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+  animation-name: smoothCloudRise;
+  animation-duration: 2.6s;
+  animation-timing-function: cubic-bezier(0.32, 0, 0.2, 1);
   animation-fill-mode: forwards;
 }
 
-.flotilla-cloud-img {
+.smooth-cloud-img {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 8px 24px rgba(244, 143, 177, 0.35));
+  filter: drop-shadow(0 12px 28px rgba(244, 143, 177, 0.38));
 }
 
-@keyframes flotillaRise {
+@keyframes smoothCloudRise {
   0% {
-    transform: translateY(115vh) translateX(0) scale(0.92);
-    opacity: 0.95;
+    transform: translate3d(0, 110vh, 0) scale(0.94);
   }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(0vh) translateX(var(--drift-x, 0px)) scale(1.05);
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
+  48% {
+    transform: translate3d(var(--drift, 0px), 0vh, 0) scale(1.04);
   }
   100% {
-    transform: translateY(-135vh) translateX(calc(var(--drift-x, 0px) * 1.6)) scale(1);
-    opacity: 0.95;
+    transform: translate3d(calc(var(--drift, 0px) * 1.5), -125vh, 0) scale(0.98);
   }
 }
 

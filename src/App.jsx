@@ -198,29 +198,29 @@ export default function App() {
       setTimeout(() => {
         setTeks1Typed('')
         setSlide(2)
-      }, 1600)
+      }, 1200)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 3800)
+      }, 2700)
     } else if (slide === 2) {
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setTeks2Typed('')
         setSlide(3)
-      }, 1600)
+      }, 1200)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 3800)
+      }, 2700)
     } else if (slide === 3) {
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setSlide(4)
-      }, 1600)
+      }, 1200)
       setTimeout(() => {
         setIsCloudTransitioning(false)
-      }, 3800)
+      }, 2700)
     }
   }
 
