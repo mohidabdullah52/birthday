@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import './App.css'
 import bgElements from './bg_elements.json'
 import PullString from './PullString'
+import CloudTransition from './CloudTransition'
 
 const teks1Lines = [
   'Today, I send all my warmest prayers and wishes to the heavens for you.',
@@ -27,6 +28,7 @@ export default function App() {
   const [teks2Typed, setTeks2Typed] = useState('')
   const [trimsTyped, setTrimsTyped] = useState('')
   const [noPos, setNoPos] = useState({ top: 0, left: 0, dodged: false })
+  const [isCloudTransitioning, setIsCloudTransitioning] = useState(false)
 
   const canvasRef = useRef(null)
   const animationFrameRef = useRef(null)
@@ -186,31 +188,39 @@ export default function App() {
     return () => clearTimeout(t)
   }, [slide])
 
-  // Advance slides via Pull String
+  // Advance slides via Pull String with Bottom-to-Top Cloud Transition Wave
   const handlePullString = () => {
+    if (isCloudTransitioning) return
+
     if (slide === 1) {
-      setSlideOutAnim('animate__backOutDown')
+      setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setTeks1Typed('')
         setSlide(2)
-        setSlideOutAnim('')
-      }, 700)
+      }, 1600)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 3800)
     } else if (slide === 2) {
-      setSlideOutAnim('animate__fadeOutLeft')
+      setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setTeks2Typed('')
         setSlide(3)
-        setSlideOutAnim('')
-      }, 600)
+      }, 1600)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 3800)
     } else if (slide === 3) {
-      setSlideOutAnim('animate__fadeOut')
+      setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setSlide(4)
-        setSlideOutAnim('')
-      }, 600)
+      }, 1600)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 3800)
     }
   }
 
@@ -248,11 +258,14 @@ export default function App() {
 
   return (
     <div className="bg" id="content">
+      {/* Bottom-to-Top Cloud Wave Transition */}
+      <CloudTransition active={isCloudTransitioning} />
+
       {/* Interactive Top-Right Themed Pull String */}
       <PullString
         onPull={handlePullString}
         isPrompting={tapVisible}
-        disabled={slide === 4 || slide === 5}
+        disabled={slide === 4 || slide === 5 || isCloudTransitioning}
       />
       <div className="original-sky-layer" aria-hidden="true">
         {bgElements.clouds.map((c, index) => (
