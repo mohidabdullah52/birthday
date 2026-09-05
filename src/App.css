@@ -719,6 +719,135 @@
   /* Pink shaded rim is already baked into the artwork PNG; no expensive dynamic CSS filters needed */
 }
 
+/* ========================================================
+   SAD RAINY GREY THEME (Active after first pull on Slide 2)
+   ======================================================== */
+.rain-canvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.bg.theme-sad-rainy {
+  background-image:
+    radial-gradient(ellipse at 50% 30%, rgba(55, 65, 81, 0.9) 0%, rgba(20, 26, 35, 0.98) 100%),
+    linear-gradient(180deg, #1e242d 0%, #29323d 40%, #1f2530 100%);
+  background-color: #1f2530;
+  transition: background 0.8s ease, background-color 0.8s ease;
+}
+
+/* Dim and desaturate background sky clouds into stormy overcast clouds */
+.theme-sad-rainy .original-cloud {
+  filter: brightness(0.48) contrast(1.1) grayscale(0.85) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+  transition: filter 1s ease;
+}
+
+/* Fade out lovey-dovey pink hearts */
+.theme-sad-rainy .original-heart {
+  opacity: 0;
+  transform: scale(0.6) translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Melancholic rainy paper styling */
+.theme-sad-rainy .paper {
+  background: #edf0f4;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: background-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.theme-sad-rainy .paper:before {
+  background: radial-gradient(#64748b 5px, transparent 6px) repeat-y;
+  background-size: 30px 30px;
+  border-right: 3px solid #64748b;
+  transition: border-right-color 0.8s ease;
+}
+
+.theme-sad-rainy .paper-content {
+  background: linear-gradient(transparent, transparent 28px, #b0bec5 28px);
+  background-size: 30px 30px;
+}
+
+.theme-sad-rainy .paper-content .teks {
+  color: #24292e;
+}
+
+.theme-sad-rainy .cursor-blink {
+  color: #64748b;
+}
+
+/* Continue prompt tap styling */
+.theme-sad-rainy #tap {
+  background: rgba(30, 41, 59, 0.85);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.theme-sad-rainy #tap:hover {
+  background: rgba(51, 65, 85, 0.95);
+  color: #f8fafc;
+}
+
+/* Pull String theme adaptation: moody slate grey cord, beads & charm */
+.theme-sad-rainy .cord-line {
+  background: #64748b;
+}
+
+.theme-sad-rainy .cord-bead {
+  background: #94a3b8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.theme-sad-rainy .mount-ring {
+  border-color: #64748b;
+}
+
+.theme-sad-rainy .mount-bracket {
+  background: #475569;
+}
+
+.theme-sad-rainy .pull-string-handle {
+  filter: drop-shadow(0 4px 14px rgba(15, 23, 42, 0.6));
+}
+
+.theme-sad-rainy .handle-bow svg path {
+  fill: #64748b;
+  stroke: #475569;
+}
+
+.theme-sad-rainy .handle-bow svg circle {
+  fill: #475569;
+}
+
+.theme-sad-rainy .handle-heart svg path {
+  fill: #475569;
+}
+
+.theme-sad-rainy .handle-heart svg {
+  filter: drop-shadow(0 3px 8px rgba(15, 23, 42, 0.6));
+}
+
+.theme-sad-rainy .pull-string-wrapper.prompting .handle-heart {
+  animation: handleRainHeartPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes handleRainHeartPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 3px 8px rgba(100, 116, 139, 0.5));
+  }
+  50% {
+    transform: scale(1.12);
+    filter: drop-shadow(0 6px 18px rgba(148, 163, 184, 0.8));
+  }
+}
+
+
 
 
 

@@ -3,6 +3,7 @@ import './App.css'
 import bgElements from './bg_elements.json'
 import PullString from './PullString'
 import CloudTransition from './CloudTransition'
+import RainEffect from './RainEffect'
 
 const teks1Lines = [
   'Today, I send all my warmest prayers and wishes to the heavens for you.',
@@ -29,6 +30,7 @@ export default function App() {
   const [trimsTyped, setTrimsTyped] = useState('')
   const [noPos, setNoPos] = useState({ top: 0, left: 0, dodged: false })
   const [isCloudTransitioning, setIsCloudTransitioning] = useState(false)
+  const [theme, setTheme] = useState('pink') // 'pink' | 'sad-rainy'
 
   const canvasRef = useRef(null)
   const animationFrameRef = useRef(null)
@@ -204,6 +206,7 @@ export default function App() {
       setTimeout(() => {
         setTeks1Typed('')
         setSlide(2)
+        setTheme('sad-rainy')
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
@@ -214,6 +217,7 @@ export default function App() {
       setTimeout(() => {
         setTeks2Typed('')
         setSlide(3)
+        setTheme('pink')
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
@@ -258,14 +262,18 @@ export default function App() {
     setTeks2Typed('')
     setTrimsTyped('')
     setSlide(1)
+    setTheme('pink')
     setNoPos({ top: 0, left: 0, dodged: false })
     runConfetti()
   }
 
   return (
-    <div className="bg" id="content">
+    <div className={`bg ${theme === 'sad-rainy' ? 'theme-sad-rainy' : ''}`} id="content">
       {/* Bottom-to-Top Cloud Wave Transition */}
       <CloudTransition active={isCloudTransitioning} />
+
+      {/* Atmospheric Rain Effect for Sad Rainy Theme */}
+      <RainEffect active={theme === 'sad-rainy'} />
 
       {/* Interactive Top-Right Themed Pull String */}
       <PullString
