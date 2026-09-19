@@ -6,6 +6,7 @@ import CloudTransition from './CloudTransition'
 import RainEffect from './RainEffect'
 import MemoriesSlide from './MemoriesSlide'
 import FlipCardsSlide from './FlipCardsSlide'
+import BirthdayLogo from './BirthdayLogo'
 
 const memory1Lines = [
   'Every memory with you feels like a little piece of magic.',
@@ -430,7 +431,7 @@ export default function App() {
           id="slideSatu"
           className={`animate__animated ${slideOutAnim || 'animate__slideInDown animate__slow'}`}
         >
-          <img src="/img/hbd1.png" className="img" alt="Happy Birthday" />
+          <BirthdayLogo name="MOHID" width={370} />
           <p
             id="tap"
             className={`animate__animated ${tapVisible ? 'animate__pulse animate__infinite' : 'd-none'}`}

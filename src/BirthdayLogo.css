@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Quicksand:wght@700;900&display=swap');
+
+.birthday-logo {
+  margin: 0 auto;
+  user-select: none;
+  filter: drop-shadow(0 14px 36px rgba(255, 120, 160, 0.24)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+  transition: transform 0.3s ease;
+}
+
+.birthday-logo:hover {
+  transform: scale(1.02);
+}
+
+.happy-text {
+  font-family: 'Quicksand', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+  font-size: 76px;
+  font-weight: 900;
+  letter-spacing: 9px;
+  fill: #f45c91;
+}
+
+.birthday-text {
+  font-family: 'Dancing Script', 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: 175px;
+  font-weight: 700;
+  letter-spacing: -3px;
+  fill: #5b3b8c;
+}
+
+.name-text {
+  font-family: 'Quicksand', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
+  font-size: 120px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  fill: #f45c91;
+}
+
+.to-you-text {
+  font-family: 'Quicksand', 'Trebuchet MS', Arial, sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  fill: #5b3b8c;
+}
+
+@media (max-height: 720px) {
+  .birthday-logo {
+    max-width: 310px !important;
+  }
+}
