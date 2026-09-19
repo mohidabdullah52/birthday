@@ -847,7 +847,777 @@
   }
 }
 
+/* ========================================================
+   MEMORIES PAGE (Slide 2: Tilted Photo Reveal & Note)
+   ======================================================== */
+.memories-slide-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 16px;
+  user-select: none;
+}
 
+.memory-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
 
+/* Polaroid Card Frame */
+.polaroid-frame {
+  position: relative;
+  width: 265px;
+  max-width: 82vw;
+  background: #ffffff;
+  padding: 12px 12px 18px 12px;
+  border-radius: 12px;
+  box-shadow: 
+    0 16px 36px rgba(255, 120, 150, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+  transform-origin: center center;
+  transition: transform 0.85s cubic-bezier(0.34, 1.4, 0.64, 1),
+              box-shadow 0.85s ease;
+  z-index: 5;
+}
+
+/* Initial Tilted State */
+.polaroid-frame.tilted-floating {
+  transform: rotate(var(--tilt-angle, -7deg)) translateY(0);
+  animation: polaroidSway 5.5s ease-in-out infinite;
+}
+
+.polaroid-frame.tilted-floating:hover {
+  transform: rotate(calc(var(--tilt-angle, -7deg) * 0.5)) scale(1.03) translateY(-4px);
+  box-shadow: 
+    0 22px 42px rgba(255, 120, 150, 0.32),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Straight & Lifted Upwards from Center State */
+.polaroid-frame.straight-lifted {
+  transform: rotate(0deg) translateY(-14px);
+  box-shadow: 
+    0 22px 46px rgba(255, 120, 150, 0.28),
+    0 6px 18px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  cursor: default;
+}
+
+@keyframes polaroidSway {
+  0%, 100% {
+    transform: rotate(var(--tilt-angle, -7deg)) translateY(0);
+  }
+  50% {
+    transform: rotate(calc(var(--tilt-angle, -7deg) + 1.5deg)) translateY(-6px);
+  }
+}
+
+/* Washi Tape Strip at top */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 96px;
+  height: 24px;
+  background: rgba(255, 209, 220, 0.85);
+  backdrop-filter: blur(2px);
+  border-left: 3px dashed rgba(255, 140, 170, 0.6);
+  border-right: 3px dashed rgba(255, 140, 170, 0.6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Photo Inner Container */
+.polaroid-photo-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fce7ec;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) inset;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  transition: filter 0.85s ease, transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.polaroid-img.hidden-img {
+  filter: blur(14px) brightness(0.92) saturate(1.2);
+  transform: scale(1.08);
+}
+
+.polaroid-img.revealed-img {
+  filter: blur(0px) brightness(1) saturate(1);
+  transform: scale(1);
+}
+
+/* Mystery Cover & Badge */
+.polaroid-mystery-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(255, 240, 245, 0.45) 0%, rgba(255, 215, 228, 0.75) 100%);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  pointer-events: none;
+  animation: mysteryPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes mysteryPulse {
+  0%, 100% {
+    background: radial-gradient(circle at center, rgba(255, 240, 245, 0.45) 0%, rgba(255, 215, 228, 0.75) 100%);
+  }
+  50% {
+    background: radial-gradient(circle at center, rgba(255, 248, 250, 0.6) 0%, rgba(255, 225, 235, 0.85) 100%);
+  }
+}
+
+.mystery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 10px 18px;
+  border-radius: 25px;
+  box-shadow: 
+    0 6px 18px rgba(255, 105, 150, 0.35),
+    0 0 0 2px rgba(255, 182, 193, 0.6);
+  animation: badgeBounce 2s ease-in-out infinite;
+}
+
+@keyframes badgeBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.04); }
+}
+
+.mystery-icon {
+  font-size: 1.25rem;
+}
+
+.mystery-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #d83a6f;
+  letter-spacing: 0.3px;
+}
+
+.mystery-sparkle {
+  font-size: 1.1rem;
+  animation: sparkleRotate 3s linear infinite;
+}
+
+@keyframes sparkleRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Shimmer Light Sweep on Reveal */
+.photo-shine-sweep {
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    45deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 65%
+  );
+  transform: rotate(25deg);
+  animation: shineSweep 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes shineSweep {
+  0% {
+    transform: translate(-100%, -100%) rotate(25deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(100%, 100%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+/* Polaroid Caption at bottom */
+.polaroid-caption {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.caption-text {
+  font-family: 'Handlee', cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #7b4d5e;
+  letter-spacing: 0.2px;
+}
+
+/* Sparkles bursts */
+.memory-sparkles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: sparkleEmerge 1.4s ease-out forwards;
+}
+
+.sparkle.s1 { top: 15%; left: 8%; animation-delay: 0.05s; }
+.sparkle.s2 { top: 10%; right: 10%; animation-delay: 0.15s; }
+.sparkle.s3 { top: 40%; left: 4%; animation-delay: 0.25s; }
+.sparkle.s4 { top: 45%; right: 5%; animation-delay: 0.1s; }
+.sparkle.s5 { bottom: 35%; left: 14%; animation-delay: 0.2s; }
+.sparkle.s6 { bottom: 30%; right: 12%; animation-delay: 0.3s; }
+
+@keyframes sparkleEmerge {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(10px);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.3) translateY(-8px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-24px);
+  }
+}
+
+/* Small Heartfelt Note Card */
+.memory-note-card {
+  position: relative;
+  width: 94%;
+  max-width: 440px;
+  margin-top: -6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 16px 22px 14px 22px;
+  box-shadow: 
+    0 14px 34px rgba(255, 140, 170, 0.22),
+    0 4px 14px rgba(0, 0, 0, 0.06),
+    0 0 0 1.5px rgba(255, 220, 230, 0.8) inset;
+  text-align: center;
+  z-index: 6;
+  animation-duration: 0.75s;
+}
+
+/* Cute decorative pin at top of note */
+.note-pin {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-head {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+
+.note-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.note-line {
+  font-family: 'Handlee', cursive;
+  font-size: 1.05rem;
+  color: #44323a;
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Continue prompt spacing */
+.memories-continue-wrapper {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-height: 720px) {
+  .polaroid-frame {
+    width: 245px;
+    padding: 10px 10px 16px 10px;
+  }
+  .polaroid-frame.straight-lifted {
+    transform: rotate(0deg) translateY(-18px);
+  }
+  .memory-note-card {
+    padding: 16px 18px 14px 18px;
+    margin-top: -8px;
+  }
+  .note-line {
+    font-size: 1.02rem;
+    line-height: 1.4;
+  }
+  .caption-text {
+    font-size: 1rem;
+  }
+}
+
+/* ========================================================
+   AUTHENTIC PLAYING CARDS PAGE (Slide 5: Deck Deal & 3D Flip)
+   ======================================================== */
+.playing-cards-slide-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 860px;
+  padding: 10px 15px;
+  user-select: none;
+}
+
+.cards-slide-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.cards-deck-title {
+  font-family: 'Handlee', cursive;
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #442a35;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
+}
+
+.cards-deck-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #7d5e6c;
+  margin: 4px 0 0 0;
+}
+
+/* Arena holding the spread */
+.cards-table-arena {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 290px;
+  perspective: 1400px;
+}
+
+.cards-deck-spread {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Individual Authentic Playing Card (Portrait 1:1.55 Aspect Ratio) */
+.authentic-playing-card {
+  position: relative;
+  width: 172px;
+  height: 268px;
+  border-radius: 14px;
+  cursor: pointer;
+  perspective: 1200px;
+  will-change: transform, box-shadow;
+  transition: transform 0.85s cubic-bezier(0.2, 0.9, 0.3, 1),
+              box-shadow 0.3s ease;
+}
+
+/* ========================================================
+   DEALING & FANNING ANIMATION (Stacked Deck -> Spread)
+   ======================================================== */
+.cards-deck-spread.is-stacked .card-index-0 {
+  transform: translateX(282px) rotate(-3deg);
+  z-index: 1;
+}
+
+.cards-deck-spread.is-stacked .card-index-1 {
+  transform: translateX(94px) rotate(1.5deg);
+  z-index: 2;
+}
+
+.cards-deck-spread.is-stacked .card-index-2 {
+  transform: translateX(-94px) rotate(-1.5deg);
+  z-index: 3;
+}
+
+.cards-deck-spread.is-stacked .card-index-3 {
+  transform: translateX(-282px) rotate(2deg);
+  z-index: 4;
+}
+
+/* Dealt State: Dealt side by side with subtle playing card fan arc */
+.cards-deck-spread.is-dealt .card-index-0 {
+  transform: translateX(0) translateY(5px) rotate(-3deg);
+  transition-delay: 0.04s;
+  z-index: 1;
+}
+
+.cards-deck-spread.is-dealt .card-index-1 {
+  transform: translateX(0) translateY(-2px) rotate(-1deg);
+  transition-delay: 0.12s;
+  z-index: 2;
+}
+
+.cards-deck-spread.is-dealt .card-index-2 {
+  transform: translateX(0) translateY(-2px) rotate(1deg);
+  transition-delay: 0.20s;
+  z-index: 3;
+}
+
+.cards-deck-spread.is-dealt .card-index-3 {
+  transform: translateX(0) translateY(5px) rotate(3deg);
+  transition-delay: 0.28s;
+  z-index: 4;
+}
+
+/* Hover Lift Effect */
+.cards-deck-spread.is-dealt .authentic-playing-card:hover {
+  transform: translateY(-16px) scale(1.03) !important;
+  z-index: 12 !important;
+}
+
+.cards-deck-spread.is-dealt .authentic-playing-card:hover .card-face {
+  box-shadow: 
+    0 22px 42px rgba(255, 100, 140, 0.32),
+    0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* 3D Card Flipper */
+.card-flipper-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.34, 1.4, 0.64, 1);
+  border-radius: 14px;
+}
+
+.authentic-playing-card.card-is-flipped .card-flipper-3d {
+  transform: rotateY(180deg);
+}
+
+/* Card Faces */
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 
+    0 12px 28px rgba(255, 120, 150, 0.22),
+    0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================================
+   CARD BACK FACE: Celestial Rose Gold & Pink Pattern
+   ======================================================== */
+.card-back-face {
+  background: linear-gradient(145deg, #ff758f 0%, #ff4d6d 50%, #c9184a 100%);
+  border: 6px solid #ffffff;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-outer-border {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-inner-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+}
+
+.card-back-corner {
+  position: absolute;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.card-back-corner.tl { top: 4px; left: 4px; }
+.card-back-corner.tr { top: 4px; right: 4px; }
+.card-back-corner.bl { bottom: 4px; left: 4px; }
+.card-back-corner.br { bottom: 4px; right: 4px; }
+
+.card-back-art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.art-rhombus {
+  width: 58px;
+  height: 58px;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+.art-inner-rhombus {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.art-center-emblem {
+  font-size: 1.15rem;
+  transform: rotate(-45deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.card-back-hint {
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(2px);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.hint-arrow {
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.hint-text {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+/* ========================================================
+   CARD FRONT FACE: Authentic Reference-Matched Layout
+   ======================================================== */
+.card-front-face {
+  background: #ffffff;
+  border: 1px solid rgba(230, 215, 222, 0.9);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 12px 10px 12px;
+  text-align: left;
+}
+
+/* Top Header */
+.card-face-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-category-title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #1a1a20;
+}
+
+.card-corner-rank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.rank-char {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e63946;
+}
+
+.suit-char {
+  font-size: 0.85rem;
+  color: #e63946;
+  margin-top: 1px;
+}
+
+/* Center Content with Dotted Dividers */
+.card-face-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 6px 0;
+  gap: 2px;
+}
+
+.card-content-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-row-text {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #382e34;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.card-dotted-divider {
+  width: 100%;
+  border-bottom: 1.5px dotted #c5b4bd;
+  margin: 7px 0;
+  opacity: 0.75;
+}
+
+/* Inverted Bottom Footer */
+.card-face-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-corner-rank.inverted,
+.card-category-title.inverted {
+  transform: rotate(180deg);
+}
+
+.card-category-title.inverted {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* Continue prompt */
+.cards-continue-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================================== */
+@media (max-width: 780px) {
+  .authentic-playing-card {
+    width: 140px;
+    height: 222px;
+  }
+  .cards-deck-spread {
+    gap: 10px;
+  }
+  .cards-deck-spread.is-stacked .card-index-0 { transform: translateX(225px) rotate(-3deg); }
+  .cards-deck-spread.is-stacked .card-index-1 { transform: translateX(75px) rotate(1.5deg); }
+  .cards-deck-spread.is-stacked .card-index-2 { transform: translateX(-75px) rotate(-1.5deg); }
+  .cards-deck-spread.is-stacked .card-index-3 { transform: translateX(-225px) rotate(2deg); }
+
+  .card-category-title { font-size: 0.86rem; }
+  .card-row-text { font-size: 0.74rem; line-height: 1.25; }
+  .card-dotted-divider { margin: 4px 0; }
+  .card-front-face { padding: 10px 10px 8px 10px; }
+}
+
+@media (max-width: 580px) {
+  .cards-deck-spread {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 320px;
+  }
+  .authentic-playing-card {
+    width: 100%;
+    height: 215px;
+  }
+  .cards-deck-spread.is-stacked .card-index-0,
+  .cards-deck-spread.is-stacked .card-index-1,
+  .cards-deck-spread.is-stacked .card-index-2,
+  .cards-deck-spread.is-stacked .card-index-3 {
+    transform: scale(0.9);
+  }
+  .cards-deck-spread.is-dealt .card-index-0,
+  .cards-deck-spread.is-dealt .card-index-1,
+  .cards-deck-spread.is-dealt .card-index-2,
+  .cards-deck-spread.is-dealt .card-index-3 {
+    transform: none;
+  }
+}
 
 

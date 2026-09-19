@@ -4,6 +4,32 @@ import bgElements from './bg_elements.json'
 import PullString from './PullString'
 import CloudTransition from './CloudTransition'
 import RainEffect from './RainEffect'
+import MemoriesSlide from './MemoriesSlide'
+import FlipCardsSlide from './FlipCardsSlide'
+
+const memory1Lines = [
+  'Every memory with you feels like a little piece of magic.',
+  'From the quiet laughs to the sweetest adventures,',
+  'you bring so much warmth and light into every single day.',
+  'Thank you for simply being the wonderful soul you are.',
+  'Wishing you a year as bright and beautiful as your smile! ✨',
+]
+
+const memory2Lines = [
+  'Some of the sweetest moments in life are the simplest ones,',
+  'like talking for hours about everything and nothing at all.',
+  'Your kindness and gentle heart make the whole world softer.',
+  'Never forget how truly special and loved you are,',
+  'today, tomorrow, and in all the years ahead. 🌸',
+]
+
+const memory3Lines = [
+  'Looking back at every journey, every milestone, every laugh,',
+  "I'm reminded of how lucky I am to share these chapters with you.",
+  'May your coming year be filled with exciting new adventures,',
+  'endless joy, peace in your heart, and dreams coming true.',
+  'Always cheering for you with all my love! 🎂💖',
+]
 
 const teks1Lines = [
   'Today, I send all my warmest prayers and wishes to the heavens for you.',
@@ -22,7 +48,7 @@ const teks2Lines = [
 ]
 
 export default function App() {
-  const [slide, setSlide] = useState(0) // 0: timer/transition, 1: slideSatu, 2: slideDua, 3: slideTiga, 4: slideEmpat, 5: slideLima
+  const [slide, setSlide] = useState(0) // 0: timer, 1: banner, 2: mem1, 3: mem2, 4: mem3, 5: flipCards, 6: paper1, 7: paper2, 8: question, 9: celebration
   const [tapVisible, setTapVisible] = useState(false)
   const [slideOutAnim, setSlideOutAnim] = useState('')
   const [teks1Typed, setTeks1Typed] = useState('')
@@ -132,9 +158,9 @@ export default function App() {
     return () => clearTimeout(t)
   }, [slide])
 
-  // Slide 2 Typewriter effect
+  // Slide 6 Typewriter effect (Paper Note 1)
   useEffect(() => {
-    if (slide !== 2) return
+    if (slide !== 6) return
     const fullText = teks1Lines.join('\n\n')
     let index = 0
 
@@ -151,9 +177,9 @@ export default function App() {
     return () => clearInterval(interval)
   }, [slide])
 
-  // Slide 3 Typewriter effect
+  // Slide 7 Typewriter effect (Paper Note 2)
   useEffect(() => {
-    if (slide !== 3) return
+    if (slide !== 7) return
     const fullText = teks2Lines.join('\n')
     let index = 0
 
@@ -176,9 +202,9 @@ export default function App() {
     img.src = '/img/clean_cloud_2.png'
   }, [])
 
-  // Slide 5 Typewriter effect
+  // Slide 9 Typewriter effect
   useEffect(() => {
-    if (slide !== 5) return
+    if (slide !== 9) return
     const text = 'Thank you.'
     let index = 0
 
@@ -201,21 +227,21 @@ export default function App() {
     if (isCloudTransitioning) return
 
     if (slide === 1) {
+      // Banner -> Memory 1
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
-        setTeks1Typed('')
         setSlide(2)
-        setTheme('sad-rainy')
+        setTheme('pink')
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
       }, 2300)
     } else if (slide === 2) {
+      // Memory 1 -> Memory 2
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
-        setTeks2Typed('')
         setSlide(3)
         setTheme('pink')
       }, 1050)
@@ -223,10 +249,57 @@ export default function App() {
         setIsCloudTransitioning(false)
       }, 2300)
     } else if (slide === 3) {
+      // Memory 2 -> Memory 3
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setSlide(4)
+        setTheme('pink')
+      }, 1050)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 2300)
+    } else if (slide === 4) {
+      // Memory 3 -> Flip Cards
+      setIsCloudTransitioning(true)
+      setTapVisible(false)
+      setTimeout(() => {
+        setSlide(5)
+        setTheme('pink')
+      }, 1050)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 2300)
+    } else if (slide === 5) {
+      // Flip Cards -> Paper Note 1 (Sad Rainy theme)
+      setIsCloudTransitioning(true)
+      setTapVisible(false)
+      setTimeout(() => {
+        setTeks1Typed('')
+        setSlide(6)
+        setTheme('sad-rainy')
+      }, 1050)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 2300)
+    } else if (slide === 6) {
+      // Paper Note 1 -> Paper Note 2 (Pink theme)
+      setIsCloudTransitioning(true)
+      setTapVisible(false)
+      setTimeout(() => {
+        setTeks2Typed('')
+        setSlide(7)
+        setTheme('pink')
+      }, 1050)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 2300)
+    } else if (slide === 7) {
+      // Paper Note 2 -> Question Box
+      setIsCloudTransitioning(true)
+      setTapVisible(false)
+      setTimeout(() => {
+        setSlide(8)
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
@@ -248,7 +321,7 @@ export default function App() {
     setSlideOutAnim('animate__bounceOut')
     setTimeout(() => {
       setTrimsTyped('')
-      setSlide(5)
+      setSlide(9)
       setSlideOutAnim('')
       runConfetti()
     }, 700)
@@ -279,7 +352,7 @@ export default function App() {
       <PullString
         onPull={handlePullString}
         isPrompting={tapVisible}
-        disabled={slide === 4 || slide === 5 || isCloudTransitioning}
+        disabled={slide === 8 || slide === 9 || isCloudTransitioning}
       />
       <div className="original-sky-layer" aria-hidden="true">
         {bgElements.clouds.map((c, index) => (
@@ -369,8 +442,60 @@ export default function App() {
         </div>
       )}
 
-      {/* Slide 2: Paper Note 1 */}
+      {/* Slide 2: Memory 1 */}
       {slide === 2 && (
+        <MemoriesSlide
+          key="mem1"
+          photoSrc="/img/memory_photo_1.png"
+          caption="Cherished Moments 💕"
+          lines={memory1Lines}
+          tiltAngle={-7}
+          onRevealed={() => setTapVisible(true)}
+          onPullString={handlePullString}
+          tapVisible={tapVisible}
+        />
+      )}
+
+      {/* Slide 3: Memory 2 */}
+      {slide === 3 && (
+        <MemoriesSlide
+          key="mem2"
+          photoSrc="/img/memory_photo_2.png"
+          caption="Happy Days & Sunshine ☀️"
+          lines={memory2Lines}
+          tiltAngle={6}
+          onRevealed={() => setTapVisible(true)}
+          onPullString={handlePullString}
+          tapVisible={tapVisible}
+        />
+      )}
+
+      {/* Slide 4: Memory 3 */}
+      {slide === 4 && (
+        <MemoriesSlide
+          key="mem3"
+          photoSrc="/img/memory_photo_3.png"
+          caption="Magical Nights & Sparklers ✨"
+          lines={memory3Lines}
+          tiltAngle={-5}
+          onRevealed={() => setTapVisible(true)}
+          onPullString={handlePullString}
+          tapVisible={tapVisible}
+        />
+      )}
+
+      {/* Slide 5: Interactive Flip Cards */}
+      {slide === 5 && (
+        <FlipCardsSlide
+          key="flipCards"
+          onRevealed={() => setTapVisible(true)}
+          onPullString={handlePullString}
+          tapVisible={tapVisible}
+        />
+      )}
+
+      {/* Slide 6: Paper Note 1 */}
+      {slide === 6 && (
         <div
           id="slideDua"
           className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
@@ -395,8 +520,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Slide 3: Paper Note 2 */}
-      {slide === 3 && (
+      {/* Slide 7: Paper Note 2 */}
+      {slide === 7 && (
         <div
           id="slideTiga"
           className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
@@ -421,8 +546,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Slide 4: Question Box */}
-      {slide === 4 && (
+      {/* Slide 8: Question Box */}
+      {slide === 8 && (
         <div
           className={`kotak slides animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
           id="slideEmpat"
@@ -451,8 +576,8 @@ export default function App() {
         </div>
       )}
 
-      {/* Slide 5: Heart Celebration */}
-      {slide === 5 && (
+      {/* Slide 9: Heart Celebration */}
+      {slide === 9 && (
         <div id="slideLima" className="animate__animated animate__bounceIn animate__slow">
           <i className="fas fa-heart heart-icon" />
           <p id="trims">{trimsTyped}</p>
