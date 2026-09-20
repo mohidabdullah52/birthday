@@ -431,7 +431,7 @@ export default function App() {
           id="slideSatu"
           className={`animate__animated ${slideOutAnim || 'animate__slideInDown animate__slow'}`}
         >
-          <BirthdayLogo name="MOHID" width={370} />
+          <BirthdayLogo name="My Madam G" width={550} />
           <p
             id="tap"
             className={`animate__animated ${tapVisible ? 'animate__pulse animate__infinite' : 'd-none'}`}

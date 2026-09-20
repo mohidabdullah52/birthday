@@ -3,48 +3,59 @@
 .birthday-logo {
   margin: 0 auto;
   user-select: none;
-  filter: drop-shadow(0 14px 36px rgba(255, 120, 160, 0.24)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  filter:
+    drop-shadow(0 12px 24px rgba(116, 71, 158, 0.15));
 }
 
 .birthday-logo:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px) scale(1.015);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .birthday-logo {
+    transition: none;
+  }
+}
+
+/* ─── Typography ─── */
 
 .happy-text {
   font-family: 'Quicksand', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
-  font-size: 76px;
+  font-size: 100px;
   font-weight: 900;
-  letter-spacing: 9px;
-  fill: #f45c91;
+  letter-spacing: 18px;
 }
 
 .birthday-text {
   font-family: 'Dancing Script', 'Brush Script MT', 'Segoe Script', cursive;
-  font-size: 175px;
+  font-size: 200px;
   font-weight: 700;
-  letter-spacing: -3px;
-  fill: #5b3b8c;
+  letter-spacing: -2px;
 }
 
 .name-text {
   font-family: 'Quicksand', 'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif;
-  font-size: 120px;
   font-weight: 900;
-  letter-spacing: 6px;
-  fill: #f45c91;
 }
 
 .to-you-text {
   font-family: 'Quicksand', 'Trebuchet MS', Arial, sans-serif;
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 800;
-  letter-spacing: 8px;
-  fill: #5b3b8c;
+  letter-spacing: 10px;
+  fill: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-height: 720px) {
   .birthday-logo {
-    max-width: 310px !important;
+    max-width: min(640px, 86vw, 80vh) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .birthday-logo {
+    max-width: min(620px, 94vw, 74vh) !important;
   }
 }
