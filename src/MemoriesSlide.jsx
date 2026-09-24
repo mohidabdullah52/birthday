@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const defaultNoteLines = [
   'Every memory with you feels like a little piece of magic.',
@@ -19,20 +19,45 @@ export default function MemoriesSlide({
 }) {
   const [isRevealed, setIsRevealed] = useState(false)
   const [showSparkles, setShowSparkles] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Listen for Escape key to close modal
+  useEffect(() => {
+    if (!isModalOpen) return
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsModalOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isModalOpen])
 
   const handleCardClick = () => {
-    if (isRevealed) return
-    setIsRevealed(true)
-    setShowSparkles(true)
+    if (!isRevealed) {
+      setIsRevealed(true)
+      setShowSparkles(true)
 
-    // Notify parent to enable pull string prompt after card finishes unfolding
-    setTimeout(() => {
-      if (onRevealed) onRevealed()
-    }, 1200)
+      // Notify parent to enable pull string prompt after card finishes unfolding
+      setTimeout(() => {
+        if (onRevealed) onRevealed()
+      }, 1200)
 
-    setTimeout(() => {
-      setShowSparkles(false)
-    }, 2000)
+      setTimeout(() => {
+        setShowSparkles(false)
+      }, 2000)
+    } else {
+      setIsModalOpen(true)
+    }
+  }
+
+  const handlePhotoClick = (e) => {
+    if (!isRevealed) {
+      handleCardClick()
+    } else {
+      e.stopPropagation()
+      setIsModalOpen(true)
+    }
   }
 
   return (
@@ -61,13 +86,13 @@ export default function MemoriesSlide({
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') handleCardClick()
           }}
-          title={isRevealed ? 'Our Memory' : 'Click to reveal photo!'}
+          title={isRevealed ? 'Click photo to enlarge' : 'Click to reveal photo!'}
         >
           {/* Decorative washi tape on top */}
           <div className="washi-tape" aria-hidden="true" />
 
           {/* Photo Inner Container */}
-          <div className="polaroid-photo-box">
+          <div className="polaroid-photo-box" onClick={handlePhotoClick}>
             <img
               src={photoSrc}
               alt="Special Birthday Memory"
@@ -87,6 +112,13 @@ export default function MemoriesSlide({
 
             {/* Shimmer light sweep on reveal */}
             {isRevealed && <div className="photo-shine-sweep" />}
+
+            {/* Subtle Zoom Hint Icon on hover when revealed */}
+            {isRevealed && (
+              <div className="photo-zoom-hint" title="Click to view full size">
+                <i className="fas fa-search-plus" />
+              </div>
+            )}
           </div>
 
           {/* Polaroid bottom caption */}
@@ -111,6 +143,48 @@ export default function MemoriesSlide({
           </div>
         )}
       </div>
+
+      {/* Enlarged 16:9 Photo Modal */}
+      {isModalOpen && (
+        <div
+          className="photo-modal-overlay animate__animated animate__fadeIn animate__faster"
+          onClick={() => setIsModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Enlarged photo view"
+        >
+          <div
+            className="photo-modal-card animate__animated animate__zoomIn animate__faster"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Small cross button on top right of the newly opened image */}
+            <button
+              className="photo-modal-close-btn"
+              onClick={() => setIsModalOpen(false)}
+              aria-label="Close modal"
+              type="button"
+              title="Close"
+            >
+              ✕
+            </button>
+
+            {/* 16:9 Image container */}
+            <div className="photo-modal-img-wrap">
+              <img
+                src={photoSrc}
+                alt="Enlarged Birthday Memory"
+                className="photo-modal-img"
+              />
+            </div>
+
+            {caption && (
+              <div className="photo-modal-caption">
+                <span>{caption}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Continue Prompt if available */}
       {tapVisible && (

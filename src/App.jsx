@@ -7,6 +7,7 @@ import RainEffect from './RainEffect'
 import MemoriesSlide from './MemoriesSlide'
 import FlipCardsSlide from './FlipCardsSlide'
 import BirthdayLogo from './BirthdayLogo'
+import SecretNoteSlide from './SecretNoteSlide'
 
 const memory1Lines = [
   'Every memory with you feels like a little piece of magic.',
@@ -159,28 +160,9 @@ export default function App() {
     return () => clearTimeout(t)
   }, [slide])
 
-  // Slide 6 Typewriter effect (Paper Note 1)
+  // Slide 6 Typewriter effect (Pink Paper Note with teks2)
   useEffect(() => {
     if (slide !== 6) return
-    const fullText = teks1Lines.join('\n\n')
-    let index = 0
-
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setTeks1Typed(fullText.slice(0, index + 1))
-        index++
-      } else {
-        clearInterval(interval)
-        setTapVisible(true)
-      }
-    }, 55)
-
-    return () => clearInterval(interval)
-  }, [slide])
-
-  // Slide 7 Typewriter effect (Paper Note 2)
-  useEffect(() => {
-    if (slide !== 7) return
     const fullText = teks2Lines.join('\n')
     let index = 0
 
@@ -193,6 +175,25 @@ export default function App() {
         setTapVisible(true)
       }
     }, 60)
+
+    return () => clearInterval(interval)
+  }, [slide])
+
+  // Slide 7 Typewriter effect (Grey Paper Note with teks1)
+  useEffect(() => {
+    if (slide !== 7) return
+    const fullText = teks1Lines.join('\n\n')
+    let index = 0
+
+    const interval = setInterval(() => {
+      if (index < fullText.length) {
+        setTeks1Typed(fullText.slice(0, index + 1))
+        index++
+      } else {
+        clearInterval(interval)
+        setTapVisible(true)
+      }
+    }, 55)
 
     return () => clearInterval(interval)
   }, [slide])
@@ -228,11 +229,11 @@ export default function App() {
     if (isCloudTransitioning) return
 
     if (slide === 1) {
-      // Banner -> Memory 1
+      // Banner -> Secret Note
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
-        setSlide(2)
+        setSlide('secret')
         setTheme('pink')
       }, 1050)
       setTimeout(() => {
@@ -272,40 +273,54 @@ export default function App() {
         setIsCloudTransitioning(false)
       }, 2300)
     } else if (slide === 5) {
-      // Flip Cards -> Paper Note 1 (Sad Rainy theme)
-      setIsCloudTransitioning(true)
-      setTapVisible(false)
-      setTimeout(() => {
-        setTeks1Typed('')
-        setSlide(6)
-        setTheme('sad-rainy')
-      }, 1050)
-      setTimeout(() => {
-        setIsCloudTransitioning(false)
-      }, 2300)
-    } else if (slide === 6) {
-      // Paper Note 1 -> Paper Note 2 (Pink theme)
+      // Flip Cards -> Paper Note (Pink theme with teks2)
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setTeks2Typed('')
-        setSlide(7)
+        setSlide(6)
         setTheme('pink')
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
       }, 2300)
+    } else if (slide === 6) {
+      // Paper Note (Pink) -> Paper Note (Sad Rainy grey theme with teks1)
+      setIsCloudTransitioning(true)
+      setTapVisible(false)
+      setTimeout(() => {
+        setTeks1Typed('')
+        setSlide(7)
+        setTheme('sad-rainy')
+      }, 1050)
+      setTimeout(() => {
+        setIsCloudTransitioning(false)
+      }, 2300)
     } else if (slide === 7) {
-      // Paper Note 2 -> Question Box
+      // Paper Note (Grey) -> Question Box (Back to Pink theme)
       setIsCloudTransitioning(true)
       setTapVisible(false)
       setTimeout(() => {
         setSlide(8)
+        setTheme('pink')
       }, 1050)
       setTimeout(() => {
         setIsCloudTransitioning(false)
       }, 2300)
     }
+  }
+
+  // Advance from Secret Note to Memory 1 upon correct password
+  const handleSecretUnlock = () => {
+    setIsCloudTransitioning(true)
+    setTapVisible(false)
+    setTimeout(() => {
+      setSlide(2)
+      setTheme('pink')
+    }, 1050)
+    setTimeout(() => {
+      setIsCloudTransitioning(false)
+    }, 2300)
   }
 
   // Dodge "Gak!" button
@@ -353,7 +368,7 @@ export default function App() {
       <PullString
         onPull={handlePullString}
         isPrompting={tapVisible}
-        disabled={slide === 8 || slide === 9 || isCloudTransitioning}
+        disabled={slide === 'secret' || slide === 8 || slide === 9 || isCloudTransitioning}
       />
       <div className="original-sky-layer" aria-hidden="true">
         {bgElements.clouds.map((c, index) => (
@@ -443,6 +458,14 @@ export default function App() {
         </div>
       )}
 
+      {/* Secret Note & Password Page (Between Banner & Memory 1) */}
+      {slide === 'secret' && (
+        <SecretNoteSlide
+          targetPassword="I LOVE YOU"
+          onUnlock={handleSecretUnlock}
+        />
+      )}
+
       {/* Slide 2: Memory 1 */}
       {slide === 2 && (
         <MemoriesSlide
@@ -495,15 +518,15 @@ export default function App() {
         />
       )}
 
-      {/* Slide 6: Paper Note 1 */}
+      {/* Slide 6: Paper Note (Pink Theme - teks2) */}
       {slide === 6 && (
         <div
           id="slideDua"
           className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
         >
           <div className="paper-content">
-            <p id="teks1" className="teks">
-              {teks1Typed}
+            <p id="teks2" className="teks">
+              {teks2Typed}
               <span className="cursor-blink">|</span>
             </p>
           </div>
@@ -521,15 +544,15 @@ export default function App() {
         </div>
       )}
 
-      {/* Slide 7: Paper Note 2 */}
+      {/* Slide 7: Paper Note (Grey Sad-Rainy Theme - teks1) */}
       {slide === 7 && (
         <div
           id="slideTiga"
           className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
         >
           <div className="paper-content">
-            <p id="teks2" className="teks">
-              {teks2Typed}
+            <p id="teks1" className="teks">
+              {teks1Typed}
               <span className="cursor-blink">|</span>
             </p>
           </div>

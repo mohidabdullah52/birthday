@@ -891,8 +891,8 @@
 /* Polaroid Card Frame */
 .polaroid-frame {
   position: relative;
-  width: 265px;
-  max-width: 82vw;
+  width: 320px;
+  max-width: 86vw;
   background: #ffffff;
   padding: 12px 12px 18px 12px;
   border-radius: 12px;
@@ -961,7 +961,7 @@
 .polaroid-photo-box {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 8px;
   background: #fce7ec;
@@ -1191,7 +1191,7 @@
 
 @media (max-height: 720px) {
   .polaroid-frame {
-    width: 245px;
+    width: 290px;
     padding: 10px 10px 16px 10px;
   }
   .polaroid-frame.straight-lifted {
@@ -1209,6 +1209,407 @@
     font-size: 1rem;
   }
 }
+
+/* Photo Zoom Hint & Hover State */
+.polaroid-frame.straight-lifted .polaroid-photo-box {
+  cursor: zoom-in;
+}
+
+.polaroid-frame.straight-lifted .polaroid-photo-box:hover .polaroid-img {
+  transform: scale(1.035);
+}
+
+.photo-zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  color: #d83a6f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.polaroid-frame.straight-lifted .polaroid-photo-box:hover .photo-zoom-hint {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ========================================================
+   ENLARGED 16:9 PHOTO MODAL
+   ======================================================== */
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 8, 18, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  cursor: pointer;
+}
+
+.photo-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  background: #ffffff;
+  padding: 12px 12px 14px 12px;
+  border-radius: 16px;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(255, 140, 180, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+/* Small cross button on top right of newly opened image */
+.photo-modal-close-btn {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #ff7597;
+  color: #ff3366;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 100001;
+  outline: none;
+  padding: 0;
+}
+
+.photo-modal-close-btn:hover {
+  transform: scale(1.15) rotate(90deg);
+  background: #ff3366;
+  color: #ffffff;
+  border-color: #ff3366;
+  box-shadow: 0 6px 18px rgba(255, 51, 102, 0.45);
+}
+
+.photo-modal-close-btn:active {
+  transform: scale(0.95);
+}
+
+.photo-modal-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12) inset;
+}
+
+.photo-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+.photo-modal-caption {
+  margin-top: 10px;
+  font-family: 'Handlee', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7b4d5e;
+  letter-spacing: 0.3px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .photo-modal-card {
+    padding: 8px 8px 10px 8px;
+    border-radius: 12px;
+  }
+  .photo-modal-close-btn {
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .photo-modal-caption {
+    font-size: 1.05rem;
+    margin-top: 8px;
+  }
+}
+
+/* ========================================================
+   SECRET NOTE & PASSWORD SLIDE (Between Slide 1 & Memory 1)
+   ======================================================== */
+.secret-note-slide-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  position: relative;
+  z-index: 10;
+  padding: 15px;
+}
+
+.secret-decor-layer {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.secret-decor-layer .decor-item {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: heartFloatA 3.5s ease-in-out infinite;
+}
+
+.secret-decor-layer .d1 { top: 5%; left: -10px; animation-delay: 0s; }
+.secret-decor-layer .d2 { top: 20%; right: -15px; animation-delay: 0.8s; }
+.secret-decor-layer .d3 { bottom: 15%; left: -15px; animation-delay: 1.6s; }
+.secret-decor-layer .d4 { bottom: 5%; right: -10px; animation-delay: 2.2s; }
+
+.secret-note-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.secret-note-bow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secret-note-bow .bow-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+.secret-note-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 28px 24px 22px 24px;
+  box-shadow: 
+    0 18px 45px rgba(255, 120, 150, 0.25),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 0 2px rgba(255, 220, 235, 0.85) inset;
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.secret-note-card.secret-card-unlocked {
+  box-shadow: 
+    0 22px 50px rgba(255, 105, 180, 0.4),
+    0 0 35px rgba(255, 182, 193, 0.6),
+    0 0 0 2px rgba(255, 140, 180, 0.9) inset;
+  transform: scale(1.02);
+}
+
+.secret-note-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 235, 243, 0.85);
+  border: 1px solid rgba(255, 182, 193, 0.7);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.secret-badge-icon {
+  font-size: 1rem;
+}
+
+.secret-badge-title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #c73866;
+  letter-spacing: 0.4px;
+}
+
+.secret-note-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.secret-note-line {
+  font-family: 'Handlee', cursive;
+  font-size: 1.15rem;
+  color: #3d2b35;
+  line-height: 1.45;
+  margin: 0;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.secret-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 14px 0 18px 0;
+}
+
+.secret-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 170, 0.45), transparent);
+}
+
+.secret-divider .divider-symbol {
+  font-size: 0.85rem;
+  color: #ff7597;
+  letter-spacing: 2px;
+}
+
+/* Password Form */
+.secret-password-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.secret-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+  background: #ffffff;
+  border: 2px solid #ffb6c1;
+  border-radius: 30px;
+  padding: 4px 5px 4px 14px;
+  box-shadow: 0 4px 14px rgba(255, 105, 150, 0.15);
+  transition: all 0.25s ease;
+}
+
+.secret-input-wrapper:focus-within {
+  border-color: #ff6584;
+  box-shadow: 0 6px 20px rgba(255, 105, 150, 0.3);
+}
+
+.secret-input-icon {
+  font-size: 1.1rem;
+  margin-right: 8px;
+  user-select: none;
+}
+
+.secret-password-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
+  padding: 8px 4px;
+  min-width: 0;
+}
+
+.secret-password-input::placeholder {
+  color: #b09ba4;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.secret-submit-btn {
+  background: linear-gradient(135deg, #ff6b8b 0%, #ff8e9b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 18px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 107, 139, 0.35);
+  transition: all 0.2s cubic-bezier(0.34, 1.5, 0.64, 1);
+  white-space: nowrap;
+}
+
+.secret-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(255, 107, 139, 0.45);
+}
+
+.secret-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.secret-submit-btn.btn-unlocked {
+  background: linear-gradient(135deg, #2a9d8f 0%, #48cae4 100%);
+  box-shadow: 0 4px 14px rgba(42, 157, 143, 0.4);
+}
+
+.secret-error-msg {
+  margin: 10px 0 0 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #e63946;
+}
+
+.secret-success-msg {
+  margin: 10px 0 0 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2a9d8f;
+}
+
+@media (max-width: 600px) {
+  .secret-note-card {
+    padding: 24px 18px 18px 18px;
+  }
+  .secret-note-line {
+    font-size: 1.05rem;
+  }
+  .secret-input-wrapper {
+    max-width: 100%;
+  }
+}
+
+
 
 /* ========================================================
    AUTHENTIC PLAYING CARDS PAGE (Slide 5: Deck Deal & 3D Flip)
