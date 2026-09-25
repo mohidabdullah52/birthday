@@ -13,6 +13,7 @@ export default function MemoriesSlide({
   lines = defaultNoteLines,
   caption = 'Cherished Moments 💕',
   tiltAngle = -7,
+  photoPosition = 'center',
   onRevealed,
   onPullString,
   tapVisible,
@@ -97,6 +98,7 @@ export default function MemoriesSlide({
               src={photoSrc}
               alt="Special Birthday Memory"
               className={`polaroid-img ${isRevealed ? 'revealed-img' : 'hidden-img'}`}
+              style={{ objectPosition: photoPosition }}
             />
 
             {/* Mystery Overlay prior to click */}
@@ -174,6 +176,7 @@ export default function MemoriesSlide({
                 src={photoSrc}
                 alt="Enlarged Birthday Memory"
                 className="photo-modal-img"
+                style={{ objectPosition: photoPosition }}
               />
             </div>
 

@@ -1,11 +1,11 @@
 import { useState, useRef } from 'react'
 
 const defaultNoteLines = [
-  'Before we step into our little gallery of memories,',
-  'there is one special secret key only you and I hold.',
-  'Three simple words that mean the whole universe to me,',
-  'and the sweetest truth that lives in my heart every single day.',
-  'Type the secret password below to unlock what is inside... 💖',
+  'I wanted to do something fun soo, before the next section,',
+  'which includes some of my favourite LOVEly memories,',
+  'YOU have to enter the password,',
+  'its a three words password and this message has all the hints needed,',
+  'GoodLuck baby!! 💖',
 ]
 
 export default function SecretNoteSlide({
@@ -30,7 +30,7 @@ export default function SecretNoteSlide({
       if (onUnlock) {
         setTimeout(() => {
           onUnlock()
-        }, 650)
+        }, 2500)
       }
     } else {
       setIsShaking(true)
@@ -66,7 +66,7 @@ export default function SecretNoteSlide({
           <div className="secret-note-header">
             <span className="secret-badge-icon">{isUnlocked ? '🔓' : '🔐'}</span>
             <span className="secret-badge-title">
-              {isUnlocked ? 'Access Granted 💕' : 'A Little Secret For You'}
+              {isUnlocked ? 'Access Granted 💕' : 'A Little Secret For My Baby'}
             </span>
           </div>
 
@@ -131,7 +131,7 @@ export default function SecretNoteSlide({
 
             {isUnlocked && (
               <p className="secret-success-msg animate__animated animate__fadeIn">
-                Yay! Opening your memories now... 💖
+                Awww, I love you too baby! 💕
               </p>
             )}
           </form>

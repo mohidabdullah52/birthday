@@ -1590,11 +1590,12 @@
 }
 
 .secret-success-msg {
-  margin: 10px 0 0 0;
+  margin: 12px 0 0 0;
   font-family: 'Quicksand', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #2a9d8f;
+  color: #d83a6f;
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 600px) {

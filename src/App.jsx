@@ -10,11 +10,11 @@ import BirthdayLogo from './BirthdayLogo'
 import SecretNoteSlide from './SecretNoteSlide'
 
 const memory1Lines = [
-  'Every memory with you feels like a little piece of magic.',
-  'From the quiet laughs to the sweetest adventures,',
-  'you bring so much warmth and light into every single day.',
-  'Thank you for simply being the wonderful soul you are.',
-  'Wishing you a year as bright and beautiful as your smile! ✨',
+  'The place where we sat together the last time',
+  'and had pizza from Eastern Oven,',
+  'I still wish i would have taken a picture of both of us here as well.',
+  'The pizza was good enough,',
+  'but you made it 10 times better. 🍕💖',
 ]
 
 const memory2Lines = [
@@ -470,7 +470,8 @@ export default function App() {
       {slide === 2 && (
         <MemoriesSlide
           key="mem1"
-          photoSrc="/img/memory_photo_1.png"
+          photoSrc="/img/memory_photo_1.jpg"
+          photoPosition="center 62%"
           caption="Cherished Moments 💕"
           lines={memory1Lines}
           tiltAngle={-7}
