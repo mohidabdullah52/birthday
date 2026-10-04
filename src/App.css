@@ -172,65 +172,169 @@
   transform: translateY(-2px);
 }
 
-/* Paper */
-.paper {
-  font-family: 'Roboto', sans-serif;
+/* ========================================================
+   DOODLE LETTER CARD (Exact Reference Design)
+   ======================================================== */
+.doodle-letter-card {
   position: relative;
-  width: 92%;
-  max-width: 760px;
-  min-width: 290px;
-  min-height: 480px;
-  margin: 30px auto;
+  width: 90%;
+  max-width: 490px;
+  height: calc(100vh - 48px);
+  max-height: calc(100vh - 40px);
+  margin: 0 auto;
+  background: #ffffff;
+  border: 3.5px solid #231f20;
+  border-radius: 20px;
+  box-shadow: 
+    0 14px 40px rgba(0, 0, 0, 0.09),
+    4px 6px 0px rgba(35, 31, 32, 0.06);
+  padding: 26px 30px 22px 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-sizing: border-box;
+  z-index: 10;
+  overflow: visible;
+}
+
+/* Header Row: Salutation + Bow on Left, Flowers on Right */
+.doodle-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.doodle-salutation-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.doodle-recipient-name {
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #231f20;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+/* Pink Bow Doodle SVG */
+.doodle-bow-icon {
+  width: 40px;
+  height: 32px;
   display: inline-block;
   vertical-align: middle;
-  line-height: normal;
-  background: #fafafa;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  overflow: hidden;
-  text-align: left;
+  transform: rotate(-3deg);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
 }
 
-.paper:before {
-  content: '';
+/* Flower Doodles in Top Right */
+.doodle-flowers-group {
+  position: relative;
+  width: 58px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.doodle-flower-icon {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 5px;
-  width: 45px;
-  background: radial-gradient(#616161 5px, transparent 6px) repeat-y;
-  background-size: 30px 30px;
-  border-right: 3px solid #D44147;
-  box-sizing: border-box;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.08));
 }
 
-.paper-content {
-  position: absolute;
-  top: 30px;
-  right: 15px;
-  bottom: 30px;
-  left: 55px;
-  background: linear-gradient(transparent, transparent 28px, #91D1D3 28px);
-  background-size: 30px 30px;
-  overflow-y: auto;
+.doodle-flower-icon.flower-upper {
+  top: -4px;
+  right: 24px;
+  width: 25px;
+  height: 25px;
+  transform: rotate(-10deg);
 }
 
-.paper-content .teks {
-  text-align: left;
+.doodle-flower-icon.flower-lower {
+  bottom: 0px;
+  right: 0px;
+  width: 23px;
+  height: 23px;
+  transform: rotate(18deg) scale(0.95);
+}
+
+/* Main Letter Body with Typewriter Text */
+.doodle-card-body {
   width: 100%;
-  min-height: 100%;
-  line-height: 30px;
-  padding: 0 10px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none; /* Hide scrollbar */
+  -ms-overflow-style: none;
+}
+
+.doodle-card-body::-webkit-scrollbar {
+  display: none;
+}
+
+.doodle-letter-text {
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 0.93rem;
+  line-height: 1.46;
+  color: #231f20;
+  letter-spacing: 0.15px;
   margin: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #3f3f44;
-  font-family: 'Handlee', cursive;
-  font-size: 19px;
-  box-sizing: border-box;
-  z-index: 1;
   white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Continue prompt */
+.doodle-card-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.doodle-continue-btn {
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.02rem;
+  color: #d83a6f;
+  cursor: pointer;
+  padding: 5px 16px;
+  border-radius: 20px;
+  background: rgba(255, 235, 240, 0.95);
+  border: 1.5px solid #ffccd5;
+  box-shadow: 0 4px 12px rgba(255, 105, 150, 0.2);
+}
+
+@media (max-width: 600px) {
+  .doodle-letter-card {
+    height: calc(100vh - 30px);
+    max-height: calc(100vh - 24px);
+    padding: 20px 18px 18px 18px;
+    border-width: 3px;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+  .doodle-card-header {
+    margin-bottom: 12px;
+  }
+  .doodle-recipient-name {
+    font-size: 1.35rem;
+  }
+  .doodle-bow-icon {
+    width: 36px;
+    height: 30px;
+  }
+  .doodle-flowers-group {
+    width: 50px;
+    height: 36px;
+  }
+  .doodle-letter-text {
+    font-size: 0.80rem;
+    line-height: 1.38;
+  }
+  .doodle-continue-btn {
+    font-size: 0.92rem;
+    padding: 4px 14px;
+  }
 }
 
 .cursor-blink {
@@ -257,7 +361,7 @@
   background: #fafafa;
   border-radius: 12px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  overflow: visible;
   transition: top 0.25s ease-out, left 0.25s ease-out;
 }
 
@@ -342,8 +446,17 @@
   min-height: 2.2rem;
 }
 
+#reelsText {
+  margin-top: 4px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #666;
+  font-family: 'Handlee', cursive;
+  min-height: 1.8rem;
+}
+
 .btn-replay {
-  margin-top: 30px;
+  margin-top: 22px;
   background: #ffffff;
   border: 2px solid #e63946;
   color: #e63946;
@@ -768,6 +881,28 @@
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+/* Melancholic rainy doodle card styling */
+.theme-sad-rainy .doodle-letter-card {
+  background: #f8fafc;
+  border-color: #334155;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.theme-sad-rainy .doodle-recipient-name {
+  color: #0f172a;
+}
+
+.theme-sad-rainy .doodle-letter-text {
+  color: #0f172a;
+}
+
+.theme-sad-rainy .doodle-continue-btn {
+  background: rgba(30, 41, 59, 0.9);
+  color: #cbd5e1;
+  border-color: #64748b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 /* Melancholic rainy paper styling */
 .theme-sad-rainy .paper {
   background: #edf0f4;
@@ -968,6 +1103,24 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) inset;
 }
 
+/* Portrait 9:16 Polaroid Frame (Instax Mini Style) */
+.polaroid-frame.polaroid-portrait {
+  width: 215px;
+  max-width: 72vw;
+  padding: 10px 10px 14px 10px;
+}
+
+.polaroid-photo-box.photo-box-portrait {
+  aspect-ratio: 9 / 16;
+}
+
+@media (max-height: 720px) {
+  .polaroid-frame.polaroid-portrait {
+    width: 190px;
+    padding: 8px 8px 12px 8px;
+  }
+}
+
 .polaroid-img {
   width: 100%;
   height: 100%;
@@ -1087,8 +1240,8 @@
 }
 
 .caption-text {
-  font-family: 'Handlee', cursive;
-  font-size: 1.15rem;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #7b4d5e;
   letter-spacing: 0.2px;
@@ -1173,10 +1326,10 @@
 }
 
 .note-line {
-  font-family: 'Handlee', cursive;
-  font-size: 1.05rem;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.15rem;
   color: #44323a;
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0;
   letter-spacing: 0.2px;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -1316,6 +1469,11 @@
   transform: scale(0.95);
 }
 
+.photo-modal-card.modal-portrait {
+  max-width: 380px;
+  padding: 10px 10px 14px 10px;
+}
+
 .photo-modal-img-wrap {
   position: relative;
   width: 100%;
@@ -1324,6 +1482,11 @@
   border-radius: 10px;
   background: #1a1a1a;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12) inset;
+}
+
+.photo-modal-img-wrap.modal-wrap-portrait {
+  aspect-ratio: 9 / 16;
+  max-height: 72vh;
 }
 
 .photo-modal-img {
@@ -1336,8 +1499,8 @@
 
 .photo-modal-caption {
   margin-top: 10px;
-  font-family: 'Handlee', cursive;
-  font-size: 1.2rem;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #7b4d5e;
   letter-spacing: 0.3px;
@@ -1455,28 +1618,27 @@
 }
 
 .secret-badge-title {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Itim', 'Mali', cursive;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   color: #c73866;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.3px;
 }
 
 .secret-note-body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .secret-note-line {
-  font-family: 'Handlee', cursive;
-  font-size: 1.15rem;
-  color: #3d2b35;
-  line-height: 1.45;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.25rem;
+  color: #231f20;
+  line-height: 1.65;
   margin: 0;
-  letter-spacing: 0.2px;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.25px;
 }
 
 .secret-divider {
@@ -1537,18 +1699,19 @@
   border: none;
   background: transparent;
   outline: none;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333333;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: #231f20;
   padding: 8px 4px;
   min-width: 0;
 }
 
 .secret-password-input::placeholder {
   color: #b09ba4;
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-family: 'Itim', 'Mali', cursive;
+  font-weight: 400;
+  font-size: 1.05rem;
 }
 
 .secret-submit-btn {
@@ -1557,9 +1720,9 @@
   border: none;
   border-radius: 25px;
   padding: 8px 18px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Itim', 'Mali', cursive;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(255, 107, 139, 0.35);
   transition: all 0.2s cubic-bezier(0.34, 1.5, 0.64, 1);
@@ -1583,17 +1746,17 @@
 
 .secret-error-msg {
   margin: 10px 0 0 0;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: #e63946;
 }
 
 .secret-success-msg {
   margin: 12px 0 0 0;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: #d83a6f;
   letter-spacing: 0.3px;
 }
@@ -1631,24 +1794,40 @@
 
 .cards-slide-header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.cards-deck-title {
-  font-family: 'Handlee', cursive;
-  font-size: 1.95rem;
-  font-weight: 700;
-  color: #442a35;
+.cards-intro-box {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 10px 24px;
+  box-shadow: 
+    0 8px 24px rgba(255, 140, 170, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 0 0 1.5px rgba(255, 220, 230, 0.85) inset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  transition: transform 0.3s ease;
+}
+
+.cards-intro-box:hover {
+  transform: translateY(-2px);
+}
+
+.cards-intro-text {
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.25rem;
+  color: #4a2e3b;
   margin: 0;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95);
-}
-
-.cards-deck-subtitle {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #7d5e6c;
-  margin: 4px 0 0 0;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Arena holding the spread */
@@ -1685,63 +1864,68 @@
 }
 
 /* ========================================================
-   DEALING & FANNING ANIMATION (Stacked Deck -> Spread)
+   DEALING ANIMATION (Stacked Deck -> Straight Line)
    ======================================================== */
 .cards-deck-spread.is-stacked .card-index-0 {
-  transform: translateX(282px) rotate(-3deg);
+  transform: translateX(180px);
+  opacity: 0.85;
   z-index: 1;
 }
 
 .cards-deck-spread.is-stacked .card-index-1 {
-  transform: translateX(94px) rotate(1.5deg);
+  transform: translateX(60px);
+  opacity: 0.95;
   z-index: 2;
 }
 
 .cards-deck-spread.is-stacked .card-index-2 {
-  transform: translateX(-94px) rotate(-1.5deg);
+  transform: translateX(-60px);
+  opacity: 0.95;
   z-index: 3;
 }
 
 .cards-deck-spread.is-stacked .card-index-3 {
-  transform: translateX(-282px) rotate(2deg);
+  transform: translateX(-180px);
+  opacity: 0.85;
   z-index: 4;
 }
 
-/* Dealt State: Dealt side by side with subtle playing card fan arc */
+/* Dealt State: Straight in line with 0 rotation and aligned horizontally */
+.cards-deck-spread.is-dealt .authentic-playing-card {
+  transform: translateX(0) translateY(0) rotate(0deg);
+  opacity: 1;
+}
+
 .cards-deck-spread.is-dealt .card-index-0 {
-  transform: translateX(0) translateY(5px) rotate(-3deg);
   transition-delay: 0.04s;
   z-index: 1;
 }
 
 .cards-deck-spread.is-dealt .card-index-1 {
-  transform: translateX(0) translateY(-2px) rotate(-1deg);
   transition-delay: 0.12s;
   z-index: 2;
 }
 
 .cards-deck-spread.is-dealt .card-index-2 {
-  transform: translateX(0) translateY(-2px) rotate(1deg);
   transition-delay: 0.20s;
   z-index: 3;
 }
 
 .cards-deck-spread.is-dealt .card-index-3 {
-  transform: translateX(0) translateY(5px) rotate(3deg);
   transition-delay: 0.28s;
   z-index: 4;
 }
 
-/* Hover Lift Effect */
+/* Hover Lift Effect: Straight up with 0 rotation */
 .cards-deck-spread.is-dealt .authentic-playing-card:hover {
-  transform: translateY(-16px) scale(1.03) !important;
+  transform: translateY(-14px) rotate(0deg) scale(1.02) !important;
   z-index: 12 !important;
 }
 
 .cards-deck-spread.is-dealt .authentic-playing-card:hover .card-face {
   box-shadow: 
-    0 22px 42px rgba(255, 100, 140, 0.32),
-    0 6px 16px rgba(0, 0, 0, 0.12);
+    0 20px 38px rgba(255, 100, 140, 0.3),
+    0 6px 14px rgba(0, 0, 0, 0.1);
 }
 
 /* 3D Card Flipper */
@@ -1774,123 +1958,76 @@
 }
 
 /* ========================================================
-   CARD BACK FACE: Celestial Rose Gold & Pink Pattern
+   CARD BACK FACE: Clean & Simple Soft Rose Design
    ======================================================== */
 .card-back-face {
-  background: linear-gradient(145deg, #ff758f 0%, #ff4d6d 50%, #c9184a 100%);
-  border: 6px solid #ffffff;
+  background: linear-gradient(145deg, #ff758f 0%, #ff4d6d 100%);
+  border: 4px solid #ffffff;
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 
+    0 10px 24px rgba(255, 100, 140, 0.22),
+    0 3px 8px rgba(0, 0, 0, 0.06);
 }
 
-.card-back-outer-border {
-  position: relative;
+.card-back-frame {
   width: 100%;
   height: 100%;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-radius: 6px;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-back-inner-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-}
-
-.card-back-corner {
-  position: absolute;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1;
-}
-
-.card-back-corner.tl { top: 4px; left: 4px; }
-.card-back-corner.tr { top: 4px; right: 4px; }
-.card-back-corner.bl { bottom: 4px; left: 4px; }
-.card-back-corner.br { bottom: 4px; right: 4px; }
-
-.card-back-art {
   position: relative;
-  width: 100%;
-  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 75%);
+}
+
+.card-back-center-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
 }
 
-.art-rhombus {
-  width: 58px;
-  height: 58px;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  transform: rotate(45deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+.authentic-playing-card:hover .card-back-center-icon {
+  transform: scale(1.12);
 }
 
-.art-inner-rhombus {
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.art-center-emblem {
-  font-size: 1.15rem;
-  transform: rotate(-45deg);
+.card-back-heart {
+  font-size: 1.7rem;
+  color: #ffffff;
+  line-height: 1;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
-.card-back-hint {
+.card-back-tap-hint {
   position: absolute;
-  bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(2px);
-  padding: 2px 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.hint-arrow {
-  font-size: 0.85rem;
-  color: #fff;
-}
-
-.hint-text {
+  bottom: 10px;
   font-family: 'Quicksand', sans-serif;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.8px;
-  color: #ffffff;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
 /* ========================================================
-   CARD FRONT FACE: Authentic Reference-Matched Layout
+   CARD FRONT FACE: Clean, Simple & Heartfelt
    ======================================================== */
 .card-front-face {
   background: #ffffff;
-  border: 1px solid rgba(230, 215, 222, 0.9);
+  border: 1.5px solid rgba(255, 215, 228, 0.9);
   transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
@@ -1909,9 +2046,9 @@
 
 .card-category-title {
   font-family: 'Quicksand', sans-serif;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: #1a1a20;
 }
 
@@ -1951,10 +2088,10 @@
 
 .card-row-text {
   font-family: 'Quicksand', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: #382e34;
-  line-height: 1.35;
+  line-height: 1.42;
   margin: 0;
 }
 
@@ -1965,27 +2102,61 @@
   opacity: 0.75;
 }
 
-/* Inverted Bottom Footer */
-.card-face-footer {
+/* Minimal Clean Footer */
+.card-face-footer-simple {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4px;
 }
 
-.card-corner-rank.inverted,
-.card-category-title.inverted {
-  transform: rotate(180deg);
-}
-
-.card-category-title.inverted {
+.card-footer-heart {
   font-size: 0.85rem;
-  opacity: 0.85;
+  color: #ff4d6d;
+  opacity: 0.55;
+}
+
+/* Message section below cards */
+.cards-footer-message {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards-footer-box {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 8px 26px;
+  box-shadow: 
+    0 8px 22px rgba(255, 140, 170, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.04),
+    0 0 0 1.5px rgba(255, 220, 230, 0.85) inset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  transition: transform 0.3s ease;
+}
+
+.cards-footer-box:hover {
+  transform: translateY(-2px);
+}
+
+.cards-footer-text {
+  font-family: 'Itim', 'Mali', cursive;
+  font-size: 1.25rem;
+  color: #4a2e3b;
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Continue prompt */
 .cards-continue-wrapper {
-  margin-top: 20px;
+  margin-top: 14px;
   display: flex;
   justify-content: center;
 }
@@ -2001,10 +2172,10 @@
   .cards-deck-spread {
     gap: 10px;
   }
-  .cards-deck-spread.is-stacked .card-index-0 { transform: translateX(225px) rotate(-3deg); }
-  .cards-deck-spread.is-stacked .card-index-1 { transform: translateX(75px) rotate(1.5deg); }
-  .cards-deck-spread.is-stacked .card-index-2 { transform: translateX(-75px) rotate(-1.5deg); }
-  .cards-deck-spread.is-stacked .card-index-3 { transform: translateX(-225px) rotate(2deg); }
+  .cards-deck-spread.is-stacked .card-index-0 { transform: translateX(180px); }
+  .cards-deck-spread.is-stacked .card-index-1 { transform: translateX(60px); }
+  .cards-deck-spread.is-stacked .card-index-2 { transform: translateX(-60px); }
+  .cards-deck-spread.is-stacked .card-index-3 { transform: translateX(-180px); }
 
   .card-category-title { font-size: 0.86rem; }
   .card-row-text { font-size: 0.74rem; line-height: 1.25; }

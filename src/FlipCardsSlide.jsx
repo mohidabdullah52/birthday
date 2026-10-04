@@ -5,44 +5,36 @@ const defaultCards = [
     id: 1,
     suit: '♥',
     rank: 'A',
-    title: 'A WISH',
+    title: 'THE LIBRARY',
     lines: [
-      'May your smile stay as warm as sunshine',
-      'Quiet wishes whispered in the dark come true',
-      'The purest kind of happiness in all you do',
+      'The time when we were sitting in the library and you kicked me, it was so cute and it still brings a smile to my face',
     ],
   },
   {
     id: 2,
     suit: '✨',
     rank: 'K',
-    title: 'KINDNESS',
+    title: 'WATER COOLER',
     lines: [
-      'Radiant energy that lights up any room',
-      'A heart that loves so deeply and so true',
-      'Never stop being so wonderfully you',
+      'And the time you brought me food for the first time, near the water cooler, and we both were awkwardly smiling and i forgot to answer the salam.',
     ],
   },
   {
     id: 3,
     suit: '🌸',
     rank: 'Q',
-    title: 'STRENGTH',
+    title: 'THE BENCH',
     lines: [
-      'Walking through every storm with quiet grace',
-      'Blooming brighter through every passing year',
-      'So endlessly proud of the soul you are',
+      'And when we sat together for the first time on the bench near the entrance and i just spouted cringe non stop, even tho embarrassing but stilll a moment i always smile when i think about it',
     ],
   },
   {
     id: 4,
     suit: '🌟',
     rank: 'J',
-    title: 'FUTURE',
+    title: 'SPORTS DAY',
     lines: [
-      'Unstoppable laughter on new journeys ahead',
-      'Cherished memories still waiting to unfold',
-      'The best chapters are only beginning now',
+      'The time when on sports day i got you the crocheted flower and you just didnt take it and started walking away from me, that was so cute, also i loved seeing them in snaps of them you sent a few times',
     ],
   },
 ]
@@ -81,10 +73,13 @@ export default function FlipCardsSlide({
 
   return (
     <div className="playing-cards-slide-container animate__animated animate__fadeIn">
-      {/* Header Banner */}
+      {/* Header text section above */}
       <div className="cards-slide-header">
-        <h3 className="cards-deck-title">Pick a Card 💕</h3>
-        <p className="cards-deck-subtitle">Click each card to flip and reveal</p>
+        <div className="cards-intro-box">
+          <p className="cards-intro-text">
+            And many many more that even if i wanted to i couldnt list all of them
+          </p>
+        </div>
       </div>
 
       {/* Cards Deck / Spread Arena */}
@@ -107,38 +102,17 @@ export default function FlipCardsSlide({
                 title={isFlipped ? 'Click to flip back' : 'Click to flip card'}
               >
                 <div className="card-flipper-3d">
-                  {/* CARD BACK: Intricate Celestial Pink Pattern */}
+                  {/* CARD BACK: Simple & Elegant */}
                   <div className="card-face card-back-face">
-                    <div className="card-back-outer-border">
-                      <div className="card-back-inner-frame">
-                        {/* Corner Accents */}
-                        <span className="card-back-corner tl">✦</span>
-                        <span className="card-back-corner tr">✦</span>
-                        <span className="card-back-corner bl">✦</span>
-                        <span className="card-back-corner br">✦</span>
-
-                        {/* Intricate Geometric & Cloud Artwork */}
-                        <div className="card-back-art">
-                          <div className="art-sunburst" />
-                          <div className="art-rhombus">
-                            <div className="art-inner-rhombus">
-                              <span className="art-center-emblem">💖</span>
-                            </div>
-                          </div>
-                          <div className="art-lines-top" />
-                          <div className="art-lines-bottom" />
-                        </div>
-
-                        {/* Subtle Tap to Flip prompt */}
-                        <div className="card-back-hint">
-                          <span className="hint-arrow">↺</span>
-                          <span className="hint-text">FLIP</span>
-                        </div>
+                    <div className="card-back-frame">
+                      <div className="card-back-center-icon">
+                        <span className="card-back-heart">♥</span>
                       </div>
+                      <span className="card-back-tap-hint">tap to flip</span>
                     </div>
                   </div>
 
-                  {/* CARD FACE: Authentic Playing Card Layout matching Reference */}
+                  {/* CARD FRONT: Clean & Heartfelt */}
                   <div className="card-face card-front-face">
                     {/* Top Header */}
                     <div className="card-face-header">
@@ -149,7 +123,7 @@ export default function FlipCardsSlide({
                       </div>
                     </div>
 
-                    {/* Dotted lines content matching reference design */}
+                    {/* Dotted lines content */}
                     <div className="card-face-body">
                       {card.lines.map((line, idx) => (
                         <div key={idx} className="card-content-row">
@@ -159,19 +133,24 @@ export default function FlipCardsSlide({
                       ))}
                     </div>
 
-                    {/* Inverted Bottom Footer (Playing Card Style) */}
-                    <div className="card-face-footer">
-                      <div className="card-corner-rank inverted">
-                        <span className="rank-char">{card.rank}</span>
-                        <span className="suit-char">{card.suit}</span>
-                      </div>
-                      <span className="card-category-title inverted">{card.title}</span>
+                    {/* Clean Minimal Footer */}
+                    <div className="card-face-footer-simple">
+                      <span className="card-footer-heart">♥</span>
                     </div>
                   </div>
                 </div>
               </div>
             )
           })}
+        </div>
+      </div>
+
+      {/* Message section below cards */}
+      <div className="cards-footer-message">
+        <div className="cards-footer-box">
+          <p className="cards-footer-text">
+            Thank you for choosing me
+          </p>
         </div>
       </div>
 

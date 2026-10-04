@@ -13,11 +13,13 @@ export default function MemoriesSlide({
   lines = defaultNoteLines,
   caption = 'Cherished Moments 💕',
   tiltAngle = -7,
+  aspectRatio = '16 / 9',
   photoPosition = 'center',
   onRevealed,
   onPullString,
   tapVisible,
 }) {
+  const isPortrait = aspectRatio === '9 / 16' || aspectRatio === '9:16' || aspectRatio === '9x16'
   const [isRevealed, setIsRevealed] = useState(false)
   const [showSparkles, setShowSparkles] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -79,7 +81,7 @@ export default function MemoriesSlide({
       <div className={`memory-stage ${isRevealed ? 'is-revealed' : 'is-tilted'}`}>
         {/* Polaroid Photo Frame */}
         <div
-          className={`polaroid-frame ${isRevealed ? 'straight-lifted' : 'tilted-floating'}`}
+          className={`polaroid-frame ${isRevealed ? 'straight-lifted' : 'tilted-floating'} ${isPortrait ? 'polaroid-portrait' : ''}`}
           style={{ '--tilt-angle': `${tiltAngle}deg` }}
           onClick={handleCardClick}
           role="button"
@@ -93,7 +95,7 @@ export default function MemoriesSlide({
           <div className="washi-tape" aria-hidden="true" />
 
           {/* Photo Inner Container */}
-          <div className="polaroid-photo-box" onClick={handlePhotoClick}>
+          <div className={`polaroid-photo-box ${isPortrait ? 'photo-box-portrait' : ''}`} onClick={handlePhotoClick}>
             <img
               src={photoSrc}
               alt="Special Birthday Memory"
@@ -156,7 +158,7 @@ export default function MemoriesSlide({
           aria-label="Enlarged photo view"
         >
           <div
-            className="photo-modal-card animate__animated animate__zoomIn animate__faster"
+            className={`photo-modal-card ${isPortrait ? 'modal-portrait' : ''} animate__animated animate__zoomIn animate__faster`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Small cross button on top right of the newly opened image */}
@@ -170,8 +172,8 @@ export default function MemoriesSlide({
               ✕
             </button>
 
-            {/* 16:9 Image container */}
-            <div className="photo-modal-img-wrap">
+            {/* Image container */}
+            <div className={`photo-modal-img-wrap ${isPortrait ? 'modal-wrap-portrait' : ''}`}>
               <img
                 src={photoSrc}
                 alt="Enlarged Birthday Memory"

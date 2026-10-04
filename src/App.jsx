@@ -8,6 +8,7 @@ import MemoriesSlide from './MemoriesSlide'
 import FlipCardsSlide from './FlipCardsSlide'
 import BirthdayLogo from './BirthdayLogo'
 import SecretNoteSlide from './SecretNoteSlide'
+import DoodleLetterCard from './DoodleLetterCard'
 
 const memory1Lines = [
   'The place where we sat together the last time',
@@ -18,35 +19,41 @@ const memory1Lines = [
 ]
 
 const memory2Lines = [
-  'Some of the sweetest moments in life are the simplest ones,',
-  'like talking for hours about everything and nothing at all.',
-  'Your kindness and gentle heart make the whole world softer.',
-  'Never forget how truly special and loved you are,',
-  'today, tomorrow, and in all the years ahead. 🌸',
+  'One of my favourites memory,',
+  'i had so much fun playing uno with my pretty cutie Bushra Noor,',
+  'beating you was the mostfun part,',
+  'second only to having you sitting by my side',
+  'while you are laughing, giggling and smiling. 🃏💖',
 ]
 
 const memory3Lines = [
-  'Looking back at every journey, every milestone, every laugh,',
-  "I'm reminded of how lucky I am to share these chapters with you.",
-  'May your coming year be filled with exciting new adventures,',
-  'endless joy, peace in your heart, and dreams coming true.',
-  'Always cheering for you with all my love! 🎂💖',
+  'last but not the least, the last picture we ever took together,',
+  'although we only took a few but this ones is still my favourite,',
+  'the last day at uni and which couldve been the last day i saw you',
+  '(but i am lucky i got another day with you).',
+  'seeing your sad face while you were leaving',
+  'will forever be etched in my mind',
 ]
 
 const teks1Lines = [
-  'Today, I send all my warmest prayers and wishes to the heavens for you.',
-  'May the challenges that tried to break you become the reasons you continue to grow.',
-  'May the world always watch over and protect you, wherever you may be.',
-  'May your days always be surrounded by love that knows no bounds.',
-  'May every step you take be blessed until you achieve all that your heart desires.',
+  'I Really miss you',
+  'We have been really far away from each other for the past few weeks. a buttons reach away but still too far. No topics to discuss, no activity to do together and worst of all our plans seems to be falling apart, like the rishta process.',
+  'I am sorry Madam g for not being good enough and for not being capable of solving all the problems.',
+  `I hope god doesnt take you away from me as a test, as i am terrified of the fact that someday i might lose you, and forget how your voice sounded and how pretty you looked.
+(inshallah i wont have to).
+I know, I know i should not have made this so emotional that too on your birthday, but i wanted to say this for a long time.
+Anyways
+May Allah always keep you happy and smiling.
+I will always be here if you need to talk about anything or need anything.
+Happy Birthday again and many many returns of the day🎉.`,
 ]
 
 const teks2Lines = [
-  'With or without me, may the universe always bring you happiness in every way.',
-  '',
-  'Happy birthday, and thank you for being so strong and making it this far.',
-  '',
-  '- Wishing you all the best',
+  'Hey there madam g, First of all HAPPPYYY BIRTHDAYY to my beautiful baby who is now a 23 year big girl, wishing you a really great birthday with many more wonderful years ahead. I am so proud of you and what you have become. From the first day together till today 804 days later you are still the love of my life and strongest, toughest and the most beautiful woman i have ever seen.',
+  'Out of every life i could have lived, this is the only one i would want because you are in it and i am so grateful for god and for myself in making the choices i made that led my path to you.',
+  'Thank you for making me a better man and for standing alongside me and not giving up on me.',
+  'And again I wish you a very very HAPPY BIRTHDAY and hope that you achieve everything you have ever dreamed of my beautiful strong baby.',
+  'With lots of Love,\nYours Well Wisher and Lover.',
 ]
 
 export default function App() {
@@ -56,6 +63,7 @@ export default function App() {
   const [teks1Typed, setTeks1Typed] = useState('')
   const [teks2Typed, setTeks2Typed] = useState('')
   const [trimsTyped, setTrimsTyped] = useState('')
+  const [reelsTyped, setReelsTyped] = useState('')
   const [noPos, setNoPos] = useState({ top: 0, left: 0, dodged: false })
   const [isCloudTransitioning, setIsCloudTransitioning] = useState(false)
   const [theme, setTheme] = useState('pink') // 'pink' | 'sad-rainy'
@@ -163,7 +171,7 @@ export default function App() {
   // Slide 6 Typewriter effect (Pink Paper Note with teks2)
   useEffect(() => {
     if (slide !== 6) return
-    const fullText = teks2Lines.join('\n')
+    const fullText = teks2Lines.join('\n\n')
     let index = 0
 
     const interval = setInterval(() => {
@@ -174,7 +182,7 @@ export default function App() {
         clearInterval(interval)
         setTapVisible(true)
       }
-    }, 60)
+    }, 28)
 
     return () => clearInterval(interval)
   }, [slide])
@@ -193,7 +201,7 @@ export default function App() {
         clearInterval(interval)
         setTapVisible(true)
       }
-    }, 55)
+    }, 28)
 
     return () => clearInterval(interval)
   }, [slide])
@@ -204,24 +212,47 @@ export default function App() {
     img.src = '/img/clean_cloud_2.png'
   }, [])
 
-  // Slide 9 Typewriter effect
+  // Slide 8: Ensure No! button is always visible in initial position
+  useEffect(() => {
+    if (slide === 8) {
+      setNoPos({ top: 0, left: 0, dodged: false })
+    }
+  }, [slide])
+
+  // Slide 9 Typewriter effect ("The End" and "Please watch my reels as well")
   useEffect(() => {
     if (slide !== 9) return
-    const text = 'Thank you.'
-    let index = 0
+    const text1 = 'The End'
+    const text2 = 'Please watch my reels as well'
+    let index1 = 0
+    let index2 = 0
+    let interval2 = null
 
     const t = setTimeout(() => {
-      const interval = setInterval(() => {
-        if (index < text.length) {
-          setTrimsTyped(text.slice(0, index + 1))
-          index++
+      const interval1 = setInterval(() => {
+        if (index1 < text1.length) {
+          setTrimsTyped(text1.slice(0, index1 + 1))
+          index1++
         } else {
-          clearInterval(interval)
+          clearInterval(interval1)
+          setTimeout(() => {
+            interval2 = setInterval(() => {
+              if (index2 < text2.length) {
+                setReelsTyped(text2.slice(0, index2 + 1))
+                index2++
+              } else {
+                clearInterval(interval2)
+              }
+            }, 60)
+          }, 300)
         }
-      }, 120)
-    }, 1000)
+      }, 100)
+    }, 700)
 
-    return () => clearTimeout(t)
+    return () => {
+      clearTimeout(t)
+      if (interval2) clearInterval(interval2)
+    }
   }, [slide])
 
   // Advance slides via Pull String with Bottom-to-Top Cloud Transition Wave
@@ -323,11 +354,26 @@ export default function App() {
     }, 2300)
   }
 
-  // Dodge "Gak!" button
+  // Click to instantly complete typing if user taps card
+  const handleSkipTeks2 = () => {
+    if (!tapVisible) {
+      setTeks2Typed(teks2Lines.join('\n\n'))
+      setTapVisible(true)
+    }
+  }
+
+  const handleSkipTeks1 = () => {
+    if (!tapVisible) {
+      setTeks1Typed(teks1Lines.join('\n\n'))
+      setTapVisible(true)
+    }
+  }
+
+  // Dodge "No!" button
   const dodgeButton = (e) => {
     e.stopPropagation()
-    const randomY = Math.floor(Math.random() * 200) - 100
-    const randomX = Math.floor(Math.random() * 260) - 130
+    const randomY = Math.floor(Math.random() * 80) - 40
+    const randomX = (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 60) + 50)
     setNoPos({ top: randomY, left: randomX, dodged: true })
   }
 
@@ -337,6 +383,7 @@ export default function App() {
     setSlideOutAnim('animate__bounceOut')
     setTimeout(() => {
       setTrimsTyped('')
+      setReelsTyped('')
       setSlide(9)
       setSlideOutAnim('')
       runConfetti()
@@ -350,6 +397,7 @@ export default function App() {
     setTeks1Typed('')
     setTeks2Typed('')
     setTrimsTyped('')
+    setReelsTyped('')
     setSlide(1)
     setTheme('pink')
     setNoPos({ top: 0, left: 0, dodged: false })
@@ -472,7 +520,7 @@ export default function App() {
           key="mem1"
           photoSrc="/img/memory_photo_1.jpg"
           photoPosition="center 62%"
-          caption="Cherished Moments 💕"
+          caption="Me, my Baby and Pizza 💕"
           lines={memory1Lines}
           tiltAngle={-7}
           onRevealed={() => setTapVisible(true)}
@@ -486,6 +534,7 @@ export default function App() {
         <MemoriesSlide
           key="mem2"
           photoSrc="/img/memory_photo_2.png"
+          aspectRatio="9 / 16"
           caption="Happy Days & Sunshine ☀️"
           lines={memory2Lines}
           tiltAngle={6}
@@ -499,8 +548,9 @@ export default function App() {
       {slide === 4 && (
         <MemoriesSlide
           key="mem3"
-          photoSrc="/img/memory_photo_3.png"
-          caption="Magical Nights & Sparklers ✨"
+          photoSrc="/img/memory_photo_3.jpg"
+          aspectRatio="16 / 9"
+          caption="Our last picture"
           lines={memory3Lines}
           tiltAngle={-5}
           onRevealed={() => setTapVisible(true)}
@@ -519,56 +569,30 @@ export default function App() {
         />
       )}
 
-      {/* Slide 6: Paper Note (Pink Theme - teks2) */}
+      {/* Slide 6: Doodle Letter Card (Pink Theme - teks2) */}
       {slide === 6 && (
-        <div
+        <DoodleLetterCard
           id="slideDua"
-          className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
-        >
-          <div className="paper-content">
-            <p id="teks2" className="teks">
-              {teks2Typed}
-              <span className="cursor-blink">|</span>
-            </p>
-          </div>
-          {tapVisible && (
-            <div style={{ position: 'absolute', bottom: '15px', right: '20px', zIndex: 10 }}>
-              <span
-                id="tap"
-                className="animate__animated animate__pulse animate__infinite"
-                onClick={handlePullString}
-              >
-                Pull the string to continue
-              </span>
-            </div>
-          )}
-        </div>
+          className={slideOutAnim || 'animate__fadeIn animate__faster'}
+          salutation="Meri Piyari Bushra,"
+          text={teks2Typed}
+          tapVisible={tapVisible}
+          onPullString={handlePullString}
+          onClick={handleSkipTeks2}
+        />
       )}
 
-      {/* Slide 7: Paper Note (Grey Sad-Rainy Theme - teks1) */}
+      {/* Slide 7: Doodle Letter Card (Sad-Rainy Theme - teks1) */}
       {slide === 7 && (
-        <div
+        <DoodleLetterCard
           id="slideTiga"
-          className={`slides paper animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
-        >
-          <div className="paper-content">
-            <p id="teks1" className="teks">
-              {teks1Typed}
-              <span className="cursor-blink">|</span>
-            </p>
-          </div>
-          {tapVisible && (
-            <div style={{ position: 'absolute', bottom: '15px', right: '20px', zIndex: 10 }}>
-              <span
-                id="tap"
-                className="animate__animated animate__pulse animate__infinite"
-                onClick={handlePullString}
-              >
-                Pull the string to continue
-              </span>
-            </div>
-          )}
-        </div>
+          className={slideOutAnim || 'animate__fadeIn animate__faster'}
+          salutation="Meri Piyari Bushra,"
+          text={teks1Typed}
+          tapVisible={tapVisible}
+          onPullString={handlePullString}
+          onClick={handleSkipTeks1}
+        />
       )}
 
       {/* Slide 8: Question Box */}
@@ -577,7 +601,7 @@ export default function App() {
           className={`kotak slides animate__animated ${slideOutAnim || 'animate__fadeIn animate__faster'}`}
           id="slideEmpat"
         >
-          <h5>Do you like it?</h5>
+          <h5>Will you marry me Piyari Madam g?</h5>
           <div className="button-row">
             <button
               id="gak"
@@ -589,13 +613,14 @@ export default function App() {
                 position: noPos.dodged ? 'relative' : 'static',
                 top: `${noPos.top}px`,
                 left: `${noPos.left}px`,
-                transition: 'top 0.15s ease, left 0.15s ease',
+                transition: 'top 0.2s ease, left 0.2s ease',
+                zIndex: 10,
               }}
             >
               No!
             </button>
             <button id="suka" className="btn btn-outline-info" type="button" onClick={handleSuka}>
-              Love it!!
+              YESSSSS!
             </button>
           </div>
         </div>
@@ -606,6 +631,7 @@ export default function App() {
         <div id="slideLima" className="animate__animated animate__bounceIn animate__slow">
           <i className="fas fa-heart heart-icon" />
           <p id="trims">{trimsTyped}</p>
+          {reelsTyped && <p id="reelsText">{reelsTyped}</p>}
           <button className="btn-replay" type="button" onClick={handleRestart}>
             <i className="fas fa-redo-alt" style={{ marginRight: '8px' }} />
             Play Again
